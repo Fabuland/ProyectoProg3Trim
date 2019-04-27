@@ -53,7 +53,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -71,7 +71,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -89,7 +89,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -107,7 +107,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -125,7 +125,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -191,10 +191,10 @@ public class TheSilkRoad extends JFrame {
 		});
 		menuP.add(botonEquipo);
 
-		JLabel lblMenuPrincipal = new JLabel("MENÚ PRINCIPAL");
-		lblMenuPrincipal.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblMenuPrincipal.setBounds(350, 21, 340, 44);
-		lblMenuPrincipal.setForeground(Color.RED);
+		JLabel lblMenuPrincipal = new JLabel(new ImageIcon("src\\proyecto\\pic\\MenúPrincipal.png"));
+		
+		lblMenuPrincipal.setBounds(330, 8, 300, 100);
+		
 		menuP.add(lblMenuPrincipal);
 
 		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\PokemonLogo.gif"));
