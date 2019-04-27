@@ -67,7 +67,7 @@ public class Equipo extends JPanel {
 		tablaEq4.setBounds(540, 380, 370, 90);
 
 		JButton btnBack = new JButton();
-		btnBack.setIcon(new ImageIcon("back.png"));
+		btnBack.setIcon(new ImageIcon("src\\proyecto\\pic\\back.png"));
 		btnBack.setBounds(10, 10, 40, 20);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

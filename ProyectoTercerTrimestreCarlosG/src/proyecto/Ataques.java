@@ -63,7 +63,7 @@ public class Ataques extends JPanel{
 		movim.setLayout(null);
 
 		JButton btnBack = new JButton();
-		btnBack.setIcon(new ImageIcon("back.png"));
+		btnBack.setIcon(new ImageIcon("src\\proyecto\\pic\\back.png"));
 		btnBack.setBounds(10, 10, 40, 20);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,7 +83,7 @@ public class Ataques extends JPanel{
 		lblAnadir.setFont(new Font("Tahoma", Font.BOLD, 16));
 		movim.add(lblAnadir);
 
-		JButton botonAnadir = new JButton(new ImageIcon("añadir.jpg"));
+		JButton botonAnadir = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
 		botonAnadir.setBounds(300, 57, 100, 40);
 		botonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,7 +97,7 @@ public class Ataques extends JPanel{
 		lblEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		movim.add(lblEliminar);
 
-		JButton botonEliminar = new JButton(new ImageIcon("eliminar.png"));
+		JButton botonEliminar = new JButton(new ImageIcon("src\\proyecto\\pic\\eliminar.png"));
 		botonEliminar.setBounds(645, 57, 100, 40);
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

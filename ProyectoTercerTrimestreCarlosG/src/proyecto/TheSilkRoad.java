@@ -77,7 +77,7 @@ public class TheSilkRoad extends JFrame {
 		equipo.setLayout(null);
 
 		JButton botonPkm = new JButton();
-		botonPkm.setIcon(new ImageIcon("pkmlogo.png"));
+		botonPkm.setIcon(new ImageIcon("src\\proyecto\\pic\\pkmlogo.png"));
 		botonPkm.setBounds(100, 100, 200, 100);
 		botonPkm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,7 +91,7 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonPkm);
 
 		JButton botonMov = new JButton();
-		botonMov.setIcon(new ImageIcon("movimientos.png"));
+		botonMov.setIcon(new ImageIcon("src\\proyecto\\pic\\movimientos.png"));
 		botonMov.setBounds(100, 220, 200, 100);
 		botonMov.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,18 +104,20 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonMov);
 
 		JButton botonSim = new JButton();
-		botonSim.setIcon(new ImageIcon("simulador.png"));
+		botonSim.setIcon(new ImageIcon("src\\proyecto\\pic\\simulador.png"));
 		botonSim.setBounds(100, 340, 200, 100);
 		botonSim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				menuP.setVisible(false);
 				simul.setVisible(true);
+				Simulador simLogo = new Simulador();
+				simLogo.añadirSimulador(simul, menuP);
 			}
 		});
 		menuP.add(botonSim);
 		
 		JButton botonEquipo = new JButton();
-		botonEquipo.setIcon(new ImageIcon("Equipo.png"));
+		botonEquipo.setIcon(new ImageIcon("src\\proyecto\\pic\\Equipo.png"));
 		botonEquipo.setBounds(715, 400, 120, 60);
 		botonEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,17 +134,17 @@ public class TheSilkRoad extends JFrame {
 		lblMenuPrincipal.setBounds(100, 21, 247, 44);
 		menuP.add(lblMenuPrincipal);
 
-		JLabel pokemonlabel = new JLabel(new ImageIcon("pkmimg.png"));
+		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\pkmimg.png"));
 		pokemonlabel.setBounds(400, 100, 200, 100);
 		menuP.add(pokemonlabel);
-		JLabel movimientoslabel = new JLabel(new ImageIcon("movimientosimg.jpg"));
+		JLabel movimientoslabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\movimientosimg.jpg"));
 		movimientoslabel.setBounds(400, 220, 200, 100);
 		menuP.add(movimientoslabel);
-		JLabel simuladorlabel = new JLabel(new ImageIcon("simuladorimg.png"));
+		JLabel simuladorlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\simuladorimg.png"));
 		simuladorlabel.setBounds(400, 340, 200, 100);
 		menuP.add(simuladorlabel);
 
-		JLabel torchic = new JLabel(new ImageIcon("combate.gif"));
+		JLabel torchic = new JLabel(new ImageIcon("src\\proyecto\\pic\\combate.gif"));
 		torchic.setBounds(625, 160, 300, 200);
 		menuP.add(torchic);
 
