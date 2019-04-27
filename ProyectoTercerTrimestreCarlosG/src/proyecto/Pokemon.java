@@ -382,7 +382,7 @@ public class Pokemon extends JPanel {
 		contenidoAñadir.add(btnAñadirBBDD);
 
 	}
-
+	
 	public void newFila(String a, String b, String c, String d, String e, String f, String g) {
 		idPr = a;
 		nombrePr = b;

@@ -1,22 +1,24 @@
 package proyecto;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
-import proyecto.*;
+import java.awt.Graphics;
 
 public class TheSilkRoad extends JFrame {
 
@@ -46,31 +48,91 @@ public class TheSilkRoad extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		menuP = new JPanel();
+		menuP = new JPanel() {
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				BufferedImage img = null;
+				try {
+					img = img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				g.drawImage(img, 0, 0, null);
+			}
+		};
 		menuP.setBounds(0, 0, 944, 502);
 		getContentPane().add(menuP);
 		menuP.setVisible(true);
 		menuP.setLayout(null);
 
-		pkm = new JPanel();
+		pkm = new JPanel(){
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				BufferedImage img = null;
+				try {
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				g.drawImage(img, 0, 0, null);
+			}
+		};
 		pkm.setBounds(0, 0, 944, 502);
 		getContentPane().add(pkm);
 		pkm.setVisible(false);
 		pkm.setLayout(null);
 
-		movim = new JPanel();
+		movim = new JPanel(){
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				BufferedImage img = null;
+				try {
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				g.drawImage(img, 0, 0, null);
+			}
+		};
 		movim.setBounds(0, 0, 944, 502);
 		getContentPane().add(movim);
 		movim.setVisible(false);
 		movim.setLayout(null);
 
-		simul = new JPanel();
+		simul = new JPanel(){
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				BufferedImage img = null;
+				try {
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				g.drawImage(img, 0, 0, null);
+			}
+		};
 		simul.setBounds(0, 0, 944, 502);
 		getContentPane().add(simul);
 		simul.setVisible(false);
 		simul.setLayout(null);
-		
-		equipo = new JPanel();
+
+		equipo = new JPanel(){
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				BufferedImage img = null;
+				try {
+					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				g.drawImage(img, 0, 0, null);
+			}
+		};
 		equipo.setBounds(0, 0, 944, 502);
 		getContentPane().add(equipo);
 		equipo.setVisible(false);
@@ -115,7 +177,7 @@ public class TheSilkRoad extends JFrame {
 			}
 		});
 		menuP.add(botonSim);
-		
+
 		JButton botonEquipo = new JButton();
 		botonEquipo.setIcon(new ImageIcon("src\\proyecto\\pic\\Equipo.png"));
 		botonEquipo.setBounds(715, 400, 120, 60);
@@ -129,32 +191,26 @@ public class TheSilkRoad extends JFrame {
 		});
 		menuP.add(botonEquipo);
 
-		JLabel lblMenuPrincipal = new JLabel("MENU PRINCIPAL");
-		lblMenuPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMenuPrincipal.setBounds(100, 21, 247, 44);
+		JLabel lblMenuPrincipal = new JLabel("MENÚ PRINCIPAL");
+		lblMenuPrincipal.setFont(new Font("Tahoma", Font.BOLD, 30));
+		lblMenuPrincipal.setBounds(350, 21, 340, 44);
+		lblMenuPrincipal.setForeground(Color.RED);
 		menuP.add(lblMenuPrincipal);
 
-		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\pkmimg.png"));
-		pokemonlabel.setBounds(400, 100, 200, 100);
+		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\PokemonLogo.gif"));
+		pokemonlabel.setBounds(350, 100, 200, 100);
 		menuP.add(pokemonlabel);
-		JLabel movimientoslabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\movimientosimg.jpg"));
-		movimientoslabel.setBounds(400, 220, 200, 100);
+		JLabel movimientoslabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\AtaqueLogo.gif"));
+		movimientoslabel.setBounds(350, 220, 200, 100);
 		menuP.add(movimientoslabel);
-		JLabel simuladorlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\simuladorimg.png"));
-		simuladorlabel.setBounds(400, 340, 200, 100);
+		JLabel simuladorlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\CombateLogo.gif"));
+		simuladorlabel.setBounds(350, 340, 200, 100);
 		menuP.add(simuladorlabel);
 
-		JLabel torchic = new JLabel(new ImageIcon("src\\proyecto\\pic\\combate.gif"));
+		JLabel torchic = new JLabel(new ImageIcon("src\\proyecto\\pic\\EquipoLogo.png"));
 		torchic.setBounds(625, 160, 300, 200);
 		menuP.add(torchic);
 
 	}
 
-	public JPanel getMenuPrincipal() {
-		return menuP;
-	}
-
-	public void setMenuPrincipal(JPanel menuPrincipal) {
-		menuP = menuPrincipal;
-	}
 }
