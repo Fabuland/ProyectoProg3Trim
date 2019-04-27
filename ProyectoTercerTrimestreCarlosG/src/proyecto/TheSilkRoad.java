@@ -40,7 +40,7 @@ public class TheSilkRoad extends JFrame {
 		setSize(anchoPantalla / 2, alturaPantalla / 2);
 		setLocation(anchoPantalla / 4, alturaPantalla / 4);
 		setTitle("The Silk Road");
-		Image icono = miPantalla.getImage("masterball.png");
+		Image icono = miPantalla.getImage("src\\proyecto\\pic\\masterball.png");
 		setIconImage(icono);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

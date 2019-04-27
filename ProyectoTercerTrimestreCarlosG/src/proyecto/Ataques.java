@@ -60,7 +60,6 @@ public class Ataques extends JPanel{
 		jp.setViewportView(tablaAt);
 		// add(jp);
 		movim.add(jp);
-		movim.setLayout(null);
 
 		JButton btnBack = new JButton();
 		btnBack.setIcon(new ImageIcon("src\\proyecto\\pic\\back.png"));
