@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 import bbdd.Conexion;
@@ -29,6 +30,8 @@ public class Simulador {
 	JButton btnBuscarNombre1, btnBuscarNombre2;
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
+	JLabel barraVida1, barraVida2;
+	JLabel nombrePkm1, nombrePkm2;
 
 	public Simulador() {
 
@@ -60,7 +63,7 @@ public class Simulador {
 		textNombreSim1.setBounds(40, 60, 140, 30);
 		sim.add(textNombreSim1);
 
-		JLabel nombrePkm1 = new JLabel("");
+		nombrePkm1 = new JLabel("");
 		nombrePkm1.setFont(new Font("Impact", Font.BOLD, 44));
 		nombrePkm1.setBounds(120, 250, 350, 50);
 		nombrePkm1.setForeground(Color.red);
@@ -101,7 +104,7 @@ public class Simulador {
 		textNombreSim2.setBounds(690, 60, 140, 30);
 		sim.add(textNombreSim2);
 
-		JLabel nombrePkm2 = new JLabel("");
+		nombrePkm2 = new JLabel("");
 		nombrePkm2.setFont(new Font("Impact", Font.BOLD, 44));
 		nombrePkm2.setBounds(600, 250, 350, 50);
 		nombrePkm2.setForeground(Color.red);
@@ -112,6 +115,7 @@ public class Simulador {
 		btnBuscarNombre2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existePkm2 = buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
+				vida2.setText(sta2 + "/" + sta2);
 			}
 		});
 		sim.add(btnBuscarNombre2);
@@ -139,7 +143,11 @@ public class Simulador {
 		btnCombatir.setBounds(400, 400, 160, 40);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				combate();
+				if (existePkm1 && existePkm2) {
+					combate();
+				} else {
+					JOptionPane.showMessageDialog(null, "Elige 2 Pokémon para comenzar");
+				}
 			}
 		});
 		sim.add(btnCombatir);
@@ -149,9 +157,18 @@ public class Simulador {
 		vida1.setBounds(175, 360, 80, 20);
 		sim.add(vida1);
 
-		JButton prueba = new JButton();
-		prueba.setBounds(40, 400, 340, 40);
-		sim.add(prueba);
+		vida2 = new JLabel();
+		vida2.setFont(fuente);
+		vida2.setBounds(710, 360, 80, 20);
+		sim.add(vida2);
+
+		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
+		barraVida1.setBounds(40, 400, 340, 40);
+		sim.add(barraVida1);
+		
+		barraVida2 = new JLabel(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
+		barraVida2.setBounds(580, 400, 340, 40);
+		sim.add(barraVida2);
 
 	}
 
@@ -227,28 +244,61 @@ public class Simulador {
 
 	public void combate() {
 
-		int daño1 = at1 / 10;
-		int daño2 = at2 / 10;
-		int staRest1 = sta1;
-		int staRest2 = sta2;
-		while (staRest1 > 0 && staRest2 > 0) {
-			staRest1 -= daño2;
-			staRest2 -= daño1;
-			if (staRest1 < 0) {
-				staRest1 = 0;
-			} else if (staRest2 < 0) {
-				staRest2 = 0;
+		int daño1 = at1 / 15;
+		int daño2 = at2 / 15;
+		Timer time = new Timer(500, null);
+		ActionListener listener = new ActionListener() {
+			int staRest1 = sta1;
+			int staRest2 = sta2;
+
+			public void actionPerformed(ActionEvent e) {
+				staRest1 -= daño2;
+				staRest2 -= daño1;
+				if (staRest1 < 0) {
+					staRest1 = 0;
+				} else if (staRest2 < 0) {
+					staRest2 = 0;
+				}
+				vida1.setText(staRest1 + "/" + sta1);
+				vida2.setText(staRest2 + "/" + sta2);
+				
+				if(staRest1 < ((sta1/4)*3) && staRest1 > (sta1/2)) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida2.png"));
+				}else if(staRest1 < ((sta1/4)*2) && staRest1 > (sta1/4)) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida3.png"));
+				}else if(staRest1 < ((sta1/4)) && staRest1 > 0) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida4.png"));
+				}else if(staRest1 == 0) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida5.png"));
+				}
+				
+				if(staRest2 < ((sta2/4)*3) && staRest2 > (sta2/2)) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida2.png"));
+				}else if(staRest2 < ((sta2/4)*2) && staRest2 > (sta2/4)) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida3.png"));
+				}else if(staRest2 < ((sta2/4)) && staRest2 > 0) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida4.png"));
+				}else if(staRest2 == 0) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida5.png"));
+				}
+
+				if (staRest1 == 0 || staRest2 == 0) {
+					time.stop();
+				}
+				
+				if(staRest1 == 0) {
+					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm2.getText()+"!!!");
+				}else if(staRest2 == 0) {
+					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm1.getText()+"!!!");;
+				}
 			}
 
-			vida1.setText(staRest1 + "/" + sta1);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		};
+		
+		
 
-		}
+		time.addActionListener(listener);
+		time.start();
 
 	}
 
