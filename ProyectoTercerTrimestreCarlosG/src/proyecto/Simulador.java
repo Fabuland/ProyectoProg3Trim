@@ -74,6 +74,7 @@ public class Simulador {
 		btnBuscarNombre1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existePkm1 = buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
+				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
 				vida1.setText(sta1 + "/" + sta1);
 			}
 		});
@@ -115,6 +116,7 @@ public class Simulador {
 		btnBuscarNombre2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existePkm2 = buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
+				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
 				vida2.setText(sta2 + "/" + sta2);
 			}
 		});
@@ -291,6 +293,8 @@ public class Simulador {
 				}else if(staRest2 == 0) {
 					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm1.getText()+"!!!");;
 				}
+				
+				
 			}
 
 		};
