@@ -25,7 +25,7 @@ import java.awt.Toolkit;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Ataques extends JPanel{
+public class Ataques extends JPanel {
 
 	String nombrePr, dañoPr, cargaNrgPr, dpsPr, epsPr, duracionPr;
 	DefaultTableModel modeloAt;
@@ -103,12 +103,11 @@ public class Ataques extends JPanel{
 				// eliminarPokemon();
 				tablaAt.getModel();
 				int i = tablaAt.getSelectedRow();
-				String nombrePkmElim = (String) tablaAt.getValueAt(i, 0);
-
-				eliminarBaseDatos(nombrePkmElim);
 
 				if (i >= 0) {
+					String nombreAtElim = (String) tablaAt.getValueAt(i, 0);
 					modeloAt.removeRow(i);
+					eliminarBaseDatos(nombreAtElim);
 
 				} else {
 					System.out.println("error al eliminar");

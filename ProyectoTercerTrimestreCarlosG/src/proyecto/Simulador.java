@@ -31,7 +31,7 @@ public class Simulador {
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
-	JLabel nombrePkm1, nombrePkm2;
+	JLabel nombrePkm1, nombrePkm2, gengar;
 
 	public Simulador() {
 
@@ -139,6 +139,10 @@ public class Simulador {
 		jp2.setVisible(true);
 		jp2.setViewportView(tablaSim2);
 		sim.add(jp2);
+		
+		gengar = new JLabel();
+		gengar.setBounds(440, 240, 80, 80);
+		sim.add(gengar);
 
 		JButton btnCombatir = new JButton("COMBATIR");
 		btnCombatir.setFont(fuente);
@@ -147,6 +151,7 @@ public class Simulador {
 			public void actionPerformed(ActionEvent e) {
 				if (existePkm1 && existePkm2) {
 					combate();
+					gengar.setIcon(new ImageIcon("src\\proyecto\\pic\\gengar.gif"));
 				} else {
 					JOptionPane.showMessageDialog(null, "Elige 2 Pokémon para comenzar");
 				}
@@ -246,9 +251,9 @@ public class Simulador {
 
 	public void combate() {
 
-		int daño1 = at1 / 15;
-		int daño2 = at2 / 15;
-		Timer time = new Timer(500, null);
+		int daño1 = at1 / 30;
+		int daño2 = at2 / 30;
+		Timer time = new Timer(250, null);
 		ActionListener listener = new ActionListener() {
 			int staRest1 = sta1;
 			int staRest2 = sta2;
@@ -290,8 +295,10 @@ public class Simulador {
 				
 				if(staRest1 == 0) {
 					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm2.getText()+"!!!");
+					gengar.setIcon(null);
 				}else if(staRest2 == 0) {
 					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm1.getText()+"!!!");;
+					gengar.setText(null);
 				}
 				
 				

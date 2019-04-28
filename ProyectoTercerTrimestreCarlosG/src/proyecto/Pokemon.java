@@ -97,19 +97,18 @@ public class Pokemon extends JPanel {
 		lblEliminar.setBounds(470, 67, 250, 23);
 		lblEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblEliminar);
-		
+
 		JButton botonEliminar = new JButton(new ImageIcon("src\\proyecto\\pic\\eliminar.png"));
 		botonEliminar.setBounds(645, 57, 100, 40);
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tablaPoke.getModel();
 				int i = tablaPoke.getSelectedRow();
-				String nombrePkmElim = (String) tablaPoke.getValueAt(i, 1);
-
-				eliminarBaseDatos(nombrePkmElim);
 
 				if (i >= 0) {
+					String nombrePkmElim = (String) tablaPoke.getValueAt(i, 1);
 					modeloPoke.removeRow(i);
+					eliminarBaseDatos(nombrePkmElim);
 
 				} else {
 					System.out.println("error al eliminar");
@@ -382,7 +381,7 @@ public class Pokemon extends JPanel {
 		contenidoAñadir.add(btnAñadirBBDD);
 
 	}
-	
+
 	public void newFila(String a, String b, String c, String d, String e, String f, String g) {
 		idPr = a;
 		nombrePr = b;
