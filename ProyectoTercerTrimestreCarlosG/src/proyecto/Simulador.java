@@ -2,6 +2,7 @@ package proyecto;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -64,9 +65,9 @@ public class Simulador {
 		sim.add(textNombreSim1);
 
 		nombrePkm1 = new JLabel("");
-		nombrePkm1.setFont(new Font("Impact", Font.BOLD, 44));
-		nombrePkm1.setBounds(120, 250, 350, 50);
-		nombrePkm1.setForeground(Color.red);
+		nombrePkm1.setFont(new Font("NSimSun", Font.BOLD, 25));
+		nombrePkm1.setBounds(20, 5, 150, 40);
+		nombrePkm1.setForeground(Color.black);
 		sim.add(nombrePkm1);
 
 		btnBuscarNombre1 = new JButton("Elegir");
@@ -74,7 +75,7 @@ public class Simulador {
 		btnBuscarNombre1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existePkm1 = buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
-				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
+				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida1.setText(sta1 + "/" + sta1);
 			}
 		});
@@ -106,9 +107,9 @@ public class Simulador {
 		sim.add(textNombreSim2);
 
 		nombrePkm2 = new JLabel("");
-		nombrePkm2.setFont(new Font("Impact", Font.BOLD, 44));
-		nombrePkm2.setBounds(600, 250, 350, 50);
-		nombrePkm2.setForeground(Color.red);
+		nombrePkm2.setFont(new Font("NSimSun", Font.BOLD, 25));
+		nombrePkm2.setBounds(20, 5, 150, 40);
+		nombrePkm2.setForeground(Color.black);
 		sim.add(nombrePkm2);
 
 		btnBuscarNombre2 = new JButton("Elegir");
@@ -116,8 +117,9 @@ public class Simulador {
 		btnBuscarNombre2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				existePkm2 = buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
-				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
+				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida2.setText(sta2 + "/" + sta2);
+
 			}
 		});
 		sim.add(btnBuscarNombre2);
@@ -139,14 +141,14 @@ public class Simulador {
 		jp2.setVisible(true);
 		jp2.setViewportView(tablaSim2);
 		sim.add(jp2);
-		
+
 		gengar = new JLabel();
 		gengar.setBounds(440, 240, 80, 80);
 		sim.add(gengar);
 
-		JButton btnCombatir = new JButton("COMBATIR");
+		JButton btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
 		btnCombatir.setFont(fuente);
-		btnCombatir.setBounds(400, 400, 160, 40);
+		btnCombatir.setBounds(400, 356, 160, 68);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (existePkm1 && existePkm2) {
@@ -160,22 +162,36 @@ public class Simulador {
 		sim.add(btnCombatir);
 
 		vida1 = new JLabel();
-		vida1.setFont(fuente);
-		vida1.setBounds(175, 360, 80, 20);
+		vida1.setFont(new Font("NSimSun", Font.BOLD, 20));
+		vida1.setBounds(260, 405, 150, 30);
 		sim.add(vida1);
 
 		vida2 = new JLabel();
-		vida2.setFont(fuente);
-		vida2.setBounds(710, 360, 80, 20);
+		vida2.setFont(new Font("NSimSun", Font.BOLD, 20));
+		vida2.setBounds(800, 405, 150, 30);
 		sim.add(vida2);
 
-		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
-		barraVida1.setBounds(40, 400, 340, 40);
+		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				// String s = "xddas";
+				// g.drawString(s, 50, 350);
+			}
+		};
+		barraVida1.setBounds(40, 340, 340, 100);
 		sim.add(barraVida1);
-		
-		barraVida2 = new JLabel(new ImageIcon("src\\proyecto\\pic\\Vida1.png"));
-		barraVida2.setBounds(580, 400, 340, 40);
+		barraVida1.add(nombrePkm1);
+
+		barraVida2 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				// String s = "xddas";
+				// g.drawString(s, 50, 350);
+			}
+		};
+		barraVida2.setBounds(580, 340, 340, 100);
 		sim.add(barraVida2);
+		barraVida2.add(nombrePkm2);
 
 	}
 
@@ -268,45 +284,60 @@ public class Simulador {
 				}
 				vida1.setText(staRest1 + "/" + sta1);
 				vida2.setText(staRest2 + "/" + sta2);
-				
-				if(staRest1 < ((sta1/4)*3) && staRest1 > (sta1/2)) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida2.png"));
-				}else if(staRest1 < ((sta1/4)*2) && staRest1 > (sta1/4)) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida3.png"));
-				}else if(staRest1 < ((sta1/4)) && staRest1 > 0) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida4.png"));
-				}else if(staRest1 == 0) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida5.png"));
+
+				if (staRest1 < ((sta1 / 8) * 7) && staRest1 > (sta1 / 8) * 6) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra78.png"));
+				} else if (staRest1 < ((sta1 / 8) * 6) && staRest1 > (sta1 / 8) * 5) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra68.png"));
+				} else if (staRest1 < ((sta1 / 8) * 5) && staRest1 > (sta1 / 8) * 4) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra58.png"));
+				} else if (staRest1 < ((sta1 / 8) * 4) && staRest1 > (sta1 / 8) * 3) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra48.png"));
+				} else if (staRest1 < ((sta1 / 8) * 3) && staRest1 > (sta1 / 8) * 2) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra38.png"));
+				} else if (staRest1 < ((sta1 / 8) * 2) && staRest1 > (sta1 / 8) * 1) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra28.png"));
+				} else if (staRest1 < ((sta1 / 8) * 1) && staRest1 > 0) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra18.png"));
+				} else if (staRest1 == 0) {
+					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra08.png"));
 				}
-				
-				if(staRest2 < ((sta2/4)*3) && staRest2 > (sta2/2)) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida2.png"));
-				}else if(staRest2 < ((sta2/4)*2) && staRest2 > (sta2/4)) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida3.png"));
-				}else if(staRest2 < ((sta2/4)) && staRest2 > 0) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida4.png"));
-				}else if(staRest2 == 0) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Vida5.png"));
+
+				if (staRest2 < ((sta2 / 8) * 7) && staRest2 > (sta2 / 8) * 6) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra78.png"));
+				} else if (staRest2 < ((sta2 / 8) * 6) && staRest2 > (sta2 / 8) * 5) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra68.png"));
+				} else if (staRest2 < ((sta2 / 8) * 5) && staRest2 > (sta2 / 8) * 4) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra58.png"));
+				} else if (staRest2 < ((sta2 / 8) * 4) && staRest2 > (sta2 / 8) * 3) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra48.png"));
+				} else if (staRest2 < ((sta2 / 8) * 3) && staRest2 > (sta2 / 8) * 2) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra38.png"));
+				} else if (staRest2 < ((sta2 / 8) * 2) && staRest2 > (sta2 / 8) * 1) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra28.png"));
+				} else if (staRest2 < ((sta2 / 8) * 1) && staRest2 > 0) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra18.png"));
+				} else if (staRest2 == 0) {
+					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra08.png"));
 				}
 
 				if (staRest1 == 0 || staRest2 == 0) {
 					time.stop();
 				}
-				
-				if(staRest1 == 0) {
-					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm2.getText()+"!!!");
+
+				if (staRest1 == 0) {
 					gengar.setIcon(null);
-				}else if(staRest2 == 0) {
-					JOptionPane.showMessageDialog(null, "El ganador es "+nombrePkm1.getText()+"!!!");;
-					gengar.setText(null);
+					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!!!");
+				} else if (staRest2 == 0) {
+					gengar.setIcon(null);
+					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!!!");
+				}else if (staRest1 == 0 && staRest2 == 0) {
+					System.out.println("empate");
 				}
-				
-				
+
 			}
 
 		};
-		
-		
 
 		time.addActionListener(listener);
 		time.start();
