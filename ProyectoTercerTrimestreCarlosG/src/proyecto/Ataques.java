@@ -218,7 +218,6 @@ public class Ataques extends JPanel {
 		try {
 			while (contador.next()) {
 				counter++;
-
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();

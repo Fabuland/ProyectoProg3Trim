@@ -33,6 +33,7 @@ public class Simulador {
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
 	JLabel nombrePkm1, nombrePkm2, gengar;
+	JLabel efectivo1, efectivo2;
 
 	public Simulador() {
 
@@ -171,6 +172,16 @@ public class Simulador {
 		vida2.setBounds(800, 405, 150, 30);
 		sim.add(vida2);
 
+		efectivo1 = new JLabel("");
+		efectivo1.setFont(new Font("NSimSun", Font.BOLD, 20));
+		efectivo1.setBounds(40, 290, 220, 30);
+		sim.add(efectivo1);
+
+		efectivo2 = new JLabel("");
+		efectivo2.setFont(new Font("NSimSun", Font.BOLD, 20));
+		efectivo2.setBounds(680, 290, 220, 30);
+		sim.add(efectivo2);
+
 		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -267,16 +278,20 @@ public class Simulador {
 
 	public void combate() {
 
-		int daño1 = at1 / 30;
-		int daño2 = at2 / 30;
+		int daño1 = daño(at1, def2);
+		int daño2 = daño(at2, def1);
+		String tipo1 = (String) modeloSim1.getValueAt(0, 3);
+		String tipo2 = (String) modeloSim2.getValueAt(0, 3);
+		int dañoF1 = dañoPorTipo(tipo1, tipo2, daño1, efectivo1);
+		int dañoF2 = dañoPorTipo(tipo2, tipo1, daño2, efectivo2);
 		Timer time = new Timer(250, null);
 		ActionListener listener = new ActionListener() {
 			int staRest1 = sta1;
 			int staRest2 = sta2;
 
 			public void actionPerformed(ActionEvent e) {
-				staRest1 -= daño2;
-				staRest2 -= daño1;
+				staRest1 -= dañoF2;
+				staRest2 -= dañoF1;
 				if (staRest1 < 0) {
 					staRest1 = 0;
 				} else if (staRest2 < 0) {
@@ -327,11 +342,11 @@ public class Simulador {
 
 				if (staRest1 == 0) {
 					gengar.setIcon(null);
-					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!!!");
+					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!");
 				} else if (staRest2 == 0) {
 					gengar.setIcon(null);
-					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!!!");
-				}else if (staRest1 == 0 && staRest2 == 0) {
+					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!");
+				} else if (staRest1 == 0 && staRest2 == 0) {
 					System.out.println("empate");
 				}
 
@@ -344,4 +359,110 @@ public class Simulador {
 
 	}
 
+	public int daño(int at, int def) {
+		int daño = (at / 15) - (def / 50);
+		if (daño < 1) {
+			daño = 1;
+		}
+		return daño;
+	}
+
+	public int dañoPorTipo(String tipoAt, String tipoDef, int dañoAt, JLabel efectivo) {
+
+		if (tipoAt.equals("Normal") && (tipoDef.equals("Roca") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Normal") && tipoDef.equals("Fantasma")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Fuego") && (tipoDef.equals("Planta") || tipoDef.equals("Hielo") || tipoDef.equals("Bicho")
+				|| tipoDef.equals("Acero"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Fuego") && (tipoDef.equals("Fuego") || tipoDef.equals("Agua")
+				|| tipoDef.equals("Roca") || tipoDef.equals("Dragon"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Agua") && (tipoDef.equals("Fuego") || tipoDef.equals("Tierra") || tipoDef.equals("Roca"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Agua")
+				&& (tipoDef.equals("Agua") || tipoDef.equals("Planta") || tipoDef.equals("Dragon"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Electrico") && (tipoDef.equals("Agua") || tipoDef.equals("Volador"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Electrico")
+				&& (tipoDef.equals("Electrico") || tipoDef.equals("Planta") || tipoDef.equals("Dragon"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Electrico") && tipoDef.equals("Tierra")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Planta") && (tipoDef.equals("Agua") || tipoDef.equals("Tierra") || tipoDef.equals("Roca"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Planta") && (tipoDef.equals("Fuego") || tipoDef.equals("Planta")
+				|| tipoDef.equals("Veneno") || tipoDef.equals("Volador") || tipoDef.equals("Bicho")
+				|| tipoDef.equals("Dragon") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Planta") && (tipoDef.equals("Agua") || tipoDef.equals("Tierra") || tipoDef.equals("Roca"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Planta") && (tipoDef.equals("Fuego") || tipoDef.equals("Planta")
+				|| tipoDef.equals("Veneno") || tipoDef.equals("Volador") || tipoDef.equals("Bicho")
+				|| tipoDef.equals("Dragon") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Hielo") && (tipoDef.equals("Planta") || tipoDef.equals("Tierra") || tipoDef.equals("Volador")
+				|| tipoDef.equals("Dragon"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Hielo") && (tipoDef.equals("Fuego") || tipoDef.equals("Agua")
+				|| tipoDef.equals("Hielo") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Lucha") && (tipoDef.equals("Normal") || tipoDef.equals("Hielo") || tipoDef.equals("Roca")
+				|| tipoDef.equals("Siniestro") || tipoDef.equals("Acero"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Lucha") && (tipoDef.equals("Veneno") || tipoDef.equals("Volador")
+				|| tipoDef.equals("Psiquico") || tipoDef.equals("Bicho"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Lucha") && tipoDef.equals("Fantasma")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+		
+		if (tipoAt.equals("Veneno") && (tipoDef.equals("Planta"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Veneno") && (tipoDef.equals("Veneno") || tipoDef.equals("Tierra")
+				|| tipoDef.equals("Roca") || tipoDef.equals("Fantasma"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Veneno") && tipoDef.equals("Acero")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		return dañoAt;
+	}
 }
