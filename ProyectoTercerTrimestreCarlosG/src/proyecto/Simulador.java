@@ -450,7 +450,7 @@ public class Simulador {
 			dañoAt = dañoAt / 2;
 			efectivo.setText("No es nada efectivo");
 		}
-		
+
 		if (tipoAt.equals("Veneno") && (tipoDef.equals("Planta"))) {
 			dañoAt = dañoAt * (3 / 2);
 			efectivo.setText("Es super efectivo!");
@@ -461,6 +461,97 @@ public class Simulador {
 		} else if (tipoAt.equals("Veneno") && tipoDef.equals("Acero")) {
 			dañoAt = dañoAt / 2;
 			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Tierra") && (tipoDef.equals("Fuego") || tipoDef.equals("Electrico")
+				|| tipoDef.equals("Veneno") || tipoDef.equals("Roca") || tipoDef.equals("Acero"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Tierra") && (tipoDef.equals("Planta") || tipoDef.equals("Bicho"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Tierra") && tipoDef.equals("Volador")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Volador")
+				&& (tipoDef.equals("Planta") || tipoDef.equals("Lucha") || tipoDef.equals("Bicho"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Volador")
+				&& (tipoDef.equals("Electrico") || tipoDef.equals("Roca") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Psiquico") && (tipoDef.equals("Lucha") || tipoDef.equals("Veneno"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Psiquico") && (tipoDef.equals("Psiquico") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Psiquico") && tipoDef.equals("Siniestro")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Bicho")
+				&& (tipoDef.equals("Planta") || tipoDef.equals("Psiquico") || tipoDef.equals("Siniestro"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Bicho")
+				&& (tipoDef.equals("Fuego") || tipoDef.equals("Lucha") || tipoDef.equals("Veneno")
+						|| tipoDef.equals("Volador") || tipoDef.equals("Fantasma") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Roca") && (tipoDef.equals("Fuego") || tipoDef.equals("Hielo") || tipoDef.equals("Volador")
+				|| tipoDef.equals("Volador"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Roca")
+				&& (tipoDef.equals("Lucha") || tipoDef.equals("Tierra") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Fantasma") && (tipoDef.equals("Psiquico") || tipoDef.equals("Fantasma"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Fantasma") && (tipoDef.equals("Siniestro") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		} else if (tipoAt.equals("Fantasma") && tipoDef.equals("Normal")) {
+			dañoAt = dañoAt / 2;
+			efectivo.setText("No es nada efectivo");
+		}
+
+		if (tipoAt.equals("Dragon") && (tipoDef.equals("Dragon"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Dragon") && (tipoDef.equals("Lucha") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Siniestro") && (tipoDef.equals("Psiquico") || tipoDef.equals("Fantasma"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Siniestro")
+				&& (tipoDef.equals("Siniestro") || tipoDef.equals("Lucha") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
+		}
+
+		if (tipoAt.equals("Acero") && (tipoDef.equals("Hielo") || tipoDef.equals("Roca"))) {
+			dañoAt = dañoAt * (3 / 2);
+			efectivo.setText("Es super efectivo!");
+		} else if (tipoAt.equals("Acero") && (tipoDef.equals("Fuego") || tipoDef.equals("Agua")
+				|| tipoDef.equals("Electrico") || tipoDef.equals("Acero"))) {
+			dañoAt = (dañoAt / 4) * 3;
+			efectivo.setText("No es muy efectivo");
 		}
 
 		return dañoAt;
