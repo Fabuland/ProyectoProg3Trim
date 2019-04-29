@@ -30,7 +30,7 @@ public class Pokemon extends JPanel {
 	String idPr, nombrePr, pcPr, ataquePr, defensaPr, staminaPr, tipoPr;
 	DefaultTableModel modeloPoke;
 	JTable tablaPoke;
-	JButton btnAdd;
+	JButton btnAdd, btnUpdate;
 	// String[] anadFila;
 
 	public Pokemon() {
@@ -79,13 +79,13 @@ public class Pokemon extends JPanel {
 		lblOrdenarPor.setBounds(85, 17, 111, 23);
 		pkm.add(lblOrdenarPor);
 
-		JLabel lblAnadir = new JLabel("Añadir nuevo Pokemon:");
-		lblAnadir.setBounds(85, 67, 250, 23);
+		JLabel lblAnadir = new JLabel("Añadir:");
+		lblAnadir.setBounds(60, 67, 80, 23);
 		lblAnadir.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblAnadir);
 
 		JButton botonAnadir = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
-		botonAnadir.setBounds(300, 57, 100, 40);
+		botonAnadir.setBounds(140, 57, 100, 40);
 		botonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				añadirPokemon();
@@ -93,13 +93,13 @@ public class Pokemon extends JPanel {
 		});
 		pkm.add(botonAnadir);
 
-		JLabel lblEliminar = new JLabel("Eliminar Pokemon:");
-		lblEliminar.setBounds(470, 67, 250, 23);
+		JLabel lblEliminar = new JLabel("Eliminar:");
+		lblEliminar.setBounds(380, 67, 250, 23);
 		lblEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblEliminar);
 
 		JButton botonEliminar = new JButton(new ImageIcon("src\\proyecto\\pic\\eliminar.png"));
-		botonEliminar.setBounds(645, 57, 100, 40);
+		botonEliminar.setBounds(470, 57, 100, 40);
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tablaPoke.getModel();
@@ -119,6 +119,20 @@ public class Pokemon extends JPanel {
 		});
 
 		pkm.add(botonEliminar);
+
+		JLabel lblUpdate = new JLabel("Actualizar:");
+		lblUpdate.setBounds(680, 67, 250, 23);
+		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		pkm.add(lblUpdate);
+
+		btnUpdate = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
+		btnUpdate.setBounds(784, 57, 100, 40);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarPokemon();
+			}
+		});
+		pkm.add(btnUpdate);
 
 		JButton btnOrdId = new JButton("ID");
 		btnOrdId.setBounds(240, 19, 89, 23);
@@ -253,6 +267,61 @@ public class Pokemon extends JPanel {
 		for (int i = 0; i < nFilas; i++) {
 			modeloPoke.removeRow(0);
 		}
+	}
+
+	public void actualizarPokemon() {
+
+		JFrame actualizarFrame = new JFrame();
+		JPanel contenidoActualizar = new JPanel();
+		actualizarFrame.setVisible(true);
+		Toolkit miPantalla = Toolkit.getDefaultToolkit();
+		Dimension tamanoPantalla = miPantalla.getScreenSize();
+		int alturaPantalla = tamanoPantalla.height;
+		int anchoPantalla = tamanoPantalla.width;
+		actualizarFrame.setSize(anchoPantalla / 4, alturaPantalla / 2);
+		actualizarFrame.setLocation(anchoPantalla / 4, alturaPantalla / 4);
+		actualizarFrame.setTitle("Actualizar tipo");
+		actualizarFrame.setVisible(true);
+		contenidoActualizar.setBounds(0, 0, 472, 502);
+		contenidoActualizar.setVisible(true);
+		contenidoActualizar.setLayout(null);
+		actualizarFrame.add(contenidoActualizar);
+
+		JLabel lblActualizaDatos = new JLabel("Actualiza el tipo del Pokemon:");
+		lblActualizaDatos.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblActualizaDatos.setBounds(10, 11, 361, 36);
+		contenidoActualizar.add(lblActualizaDatos);
+
+		JLabel lblNombre = new JLabel("Nombre: ");
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNombre.setBounds(20, 58, 100, 20);
+		contenidoActualizar.add(lblNombre);
+
+		JTextField textNombre = new JTextField();
+		textNombre.setEditable(true);
+		textNombre.setBounds(150, 58, 221, 20);
+		contenidoActualizar.add(textNombre);
+
+		JLabel lblTipo = new JLabel("Tipo: ");
+		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTipo.setBounds(20, 108, 100, 20);
+		contenidoActualizar.add(lblTipo);
+
+		JTextField textTipo = new JTextField();
+		textTipo.setEditable(true);
+		textTipo.setBounds(150, 108, 221, 20);
+		contenidoActualizar.add(textTipo);
+		
+		JButton btnActBBDD = new JButton("ACTUALIZAR");
+		btnActBBDD.setBounds(200, 425, 120, 30);
+		btnActBBDD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarBaseDatos(textNombre.getText(), textTipo.getText());
+				actualizarFrame.setVisible(false);
+			}
+		});
+		contenidoActualizar.add(btnActBBDD);
+
 	}
 
 	public void añadirPokemon() {
@@ -399,6 +468,12 @@ public class Pokemon extends JPanel {
 		Conexion.EjecutarUpdate("INSERT INTO pokemon VALUES (" + idPokemon + ", \"" + nombre + "\", " + pc + ", "
 				+ ataque + ", " + defensa + ", " + stamina + ", \"" + tipo + "\");");
 
+	}
+	
+	public void actualizarBaseDatos(String nombre, String tipo) {
+		
+		Conexion.EjecutarUpdate("UPDATE pokemon SET tipo = \"" + tipo + "\" WHERE nombre = \"" + nombre + "\";");
+		
 	}
 
 	public void eliminarBaseDatos(String nombre) {
