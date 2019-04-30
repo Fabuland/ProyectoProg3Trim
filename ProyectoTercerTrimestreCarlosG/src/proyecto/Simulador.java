@@ -6,9 +6,11 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -161,18 +163,6 @@ public class Simulador {
 				if (existePkm1 && existePkm2) {
 					combate();
 					gengar.setIcon(new ImageIcon("src\\proyecto\\pic\\gengar.gif"));
-					Timer time = new Timer(300, null);
-					ActionListener listener = new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-						}
-					};
-					System.out.println(pkm1 + pkm2 + ganador);
-					try {
-						registrarBatallas(pkm1, pkm2, ganador);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Elige 2 Pokémon para comenzar");
 				}
@@ -365,20 +355,29 @@ public class Simulador {
 
 				if (staRest1 == 0 || staRest2 == 0) {
 					time.stop();
+					pkm1 = nombrePkm1.getText();
+					pkm2 = nombrePkm2.getText();
+					if (staRest1 == 0) {
+						ganador = nombrePkm2.getText();
+					} else if (staRest2 == 0) {
+						ganador = nombrePkm1.getText();
+					}
+
+					System.out.println(pkm1 + pkm2 + ganador);
+					try {
+						registrarBatallas(pkm1, pkm2, ganador);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 
 				if (staRest1 == 0) {
 					gengar.setIcon(null);
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!");
-					pkm1 = nombrePkm1.getText();
-					pkm2 = nombrePkm2.getText();
-					ganador = nombrePkm2.getName();
 				} else if (staRest2 == 0) {
 					gengar.setIcon(null);
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!");
-					pkm1 = nombrePkm1.getText();
-					pkm2 = nombrePkm2.getText();
-					ganador = nombrePkm1.getName();
 				} else if (staRest1 == 0 && staRest2 == 0) {
 					System.out.println("empate");
 				}
@@ -435,16 +434,11 @@ public class Simulador {
 
 		String ruta = "src/proyecto/RegistroCombates.txt";
 		File fichero = new File(ruta);
-
 		Scanner reader = new Scanner(fichero);
-		FileWriter writer = new FileWriter(ruta);
-		while (reader.hasNext()) {
-			String data = reader.nextLine();
-			writer.write(data);
-			writer.write(System.lineSeparator());
-		}
+		FileWriter writer = new FileWriter(ruta, true);
 		String combate = pkm1 + " vs " + pkm2 + ". Ganador: " + ganador;
 		writer.write(combate);
+		writer.write(System.lineSeparator());
 		reader.close();
 		writer.close();
 	}
