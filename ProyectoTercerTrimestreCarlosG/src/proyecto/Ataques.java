@@ -124,7 +124,7 @@ public class Ataques extends JPanel {
 		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
 		movim.add(lblUpdate);
 
-		btnUpdate = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
+		btnUpdate = new JButton(new ImageIcon("src\\proyecto\\pic\\update.png"));
 		btnUpdate.setBounds(784, 57, 100, 40);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

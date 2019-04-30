@@ -78,6 +78,7 @@ public class Simulador {
 				existePkm1 = buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
 				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida1.setText(sta1 + "/" + sta1);
+				efectivo1.setText("");
 			}
 		});
 		sim.add(btnBuscarNombre1);
@@ -120,6 +121,7 @@ public class Simulador {
 				existePkm2 = buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
 				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida2.setText(sta2 + "/" + sta2);
+				efectivo2.setText("");
 
 			}
 		});
@@ -144,11 +146,10 @@ public class Simulador {
 		sim.add(jp2);
 
 		gengar = new JLabel();
-		gengar.setBounds(440, 240, 80, 80);
+		gengar.setBounds(440, 130, 80, 80);
 		sim.add(gengar);
 
 		JButton btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
-		btnCombatir.setFont(fuente);
 		btnCombatir.setBounds(400, 356, 160, 68);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -161,6 +162,15 @@ public class Simulador {
 			}
 		});
 		sim.add(btnCombatir);
+
+		JButton btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
+		btnRandom.setBounds(440, 240, 80, 40);
+		btnRandom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				randomCombat();
+			}
+		});
+		sim.add(btnRandom);
 
 		vida1 = new JLabel();
 		vida1.setFont(new Font("NSimSun", Font.BOLD, 20));
@@ -365,6 +375,37 @@ public class Simulador {
 			daño = 1;
 		}
 		return daño;
+	}
+
+	public void randomCombat() {
+
+		ResultSet cons1 = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY RAND() LIMIT 1");
+		String pok1Random = null;
+		try {
+			while (cons1.next()) {
+				pok1Random = cons1.getString("nombre");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		ResultSet cons2 = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY RAND() LIMIT 1");
+		String pok2Random = "";
+		try {
+			while (cons2.next()) {
+				pok2Random = cons2.getString("nombre");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		textNombreSim1.setText(pok1Random);
+		textNombreSim2.setText(pok2Random);
+		
+		btnBuscarNombre1.doClick();
+		btnBuscarNombre2.doClick();
+
 	}
 
 	public int dañoPorTipo(String tipoAt, String tipoDef, int dañoAt, JLabel efectivo) {
