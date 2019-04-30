@@ -30,7 +30,7 @@ public class Ataques extends JPanel {
 	String nombrePr, dañoPr, cargaNrgPr, dpsPr, epsPr, duracionPr;
 	DefaultTableModel modeloAt;
 	JTable tablaAt;
-	JButton btnAddAt;
+	JButton btnAddAt, btnUpdate;
 
 	public Ataques() {
 
@@ -77,13 +77,13 @@ public class Ataques extends JPanel {
 		lblOrdenarPor.setBounds(85, 17, 111, 23);
 		movim.add(lblOrdenarPor);
 
-		JLabel lblAnadir = new JLabel("Añadir nuevo Ataque:");
-		lblAnadir.setBounds(85, 67, 250, 23);
+		JLabel lblAnadir = new JLabel("Añadir:");
+		lblAnadir.setBounds(60, 67, 250, 23);
 		lblAnadir.setFont(new Font("Tahoma", Font.BOLD, 16));
 		movim.add(lblAnadir);
 
 		JButton botonAnadir = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
-		botonAnadir.setBounds(300, 57, 100, 40);
+		botonAnadir.setBounds(140, 57, 100, 40);
 		botonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				añadirAtaque();
@@ -91,13 +91,13 @@ public class Ataques extends JPanel {
 		});
 		movim.add(botonAnadir);
 
-		JLabel lblEliminar = new JLabel("Eliminar Pokemon:");
-		lblEliminar.setBounds(470, 67, 250, 23);
+		JLabel lblEliminar = new JLabel("Eliminar:");
+		lblEliminar.setBounds(380, 67, 250, 23);
 		lblEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		movim.add(lblEliminar);
 
 		JButton botonEliminar = new JButton(new ImageIcon("src\\proyecto\\pic\\eliminar.png"));
-		botonEliminar.setBounds(645, 57, 100, 40);
+		botonEliminar.setBounds(470, 57, 100, 40);
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// eliminarPokemon();
@@ -118,6 +118,20 @@ public class Ataques extends JPanel {
 		});
 
 		movim.add(botonEliminar);
+
+		JLabel lblUpdate = new JLabel("Actualizar:");
+		lblUpdate.setBounds(680, 67, 250, 23);
+		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
+		movim.add(lblUpdate);
+
+		btnUpdate = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
+		btnUpdate.setBounds(784, 57, 100, 40);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarAtaque();
+			}
+		});
+		movim.add(btnUpdate);
 
 		JButton btnOrdIDaño = new JButton("DAÑO");
 		btnOrdIDaño.setBounds(240, 19, 100, 23);
@@ -263,7 +277,7 @@ public class Ataques extends JPanel {
 		int anchoPantalla = tamanoPantalla.width;
 		añadirFrame.setSize(anchoPantalla / 4, alturaPantalla / 2);
 		añadirFrame.setLocation(anchoPantalla / 2, alturaPantalla / 4);
-		añadirFrame.setTitle("Añadir Pokemon");
+		añadirFrame.setTitle("Añadir Ataque");
 		añadirFrame.setVisible(true);
 		contenidoAñadir.setBounds(0, 0, 472, 502);
 		contenidoAñadir.setVisible(true);
@@ -361,6 +375,62 @@ public class Ataques extends JPanel {
 
 	}
 
+	public void actualizarAtaque() {
+
+		JFrame actualizarFrame = new JFrame();
+		JPanel contenidoActualizar = new JPanel();
+		actualizarFrame.setVisible(true);
+		Toolkit miPantalla = Toolkit.getDefaultToolkit();
+		Dimension tamanoPantalla = miPantalla.getScreenSize();
+		int alturaPantalla = tamanoPantalla.height;
+		int anchoPantalla = tamanoPantalla.width;
+		actualizarFrame.setSize(anchoPantalla / 4, alturaPantalla / 2);
+		actualizarFrame.setLocation(anchoPantalla / 4, alturaPantalla / 4);
+		actualizarFrame.setTitle("Actualizar tipo");
+		actualizarFrame.setVisible(true);
+		contenidoActualizar.setBounds(0, 0, 472, 502);
+		contenidoActualizar.setVisible(true);
+		contenidoActualizar.setLayout(null);
+		actualizarFrame.add(contenidoActualizar);
+
+		JLabel lblActualizaDatos = new JLabel("Actualiza el tipo del Pokemon:");
+		lblActualizaDatos.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblActualizaDatos.setBounds(10, 11, 361, 36);
+		contenidoActualizar.add(lblActualizaDatos);
+
+		JLabel lblNombre = new JLabel("Nombre: ");
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNombre.setBounds(20, 58, 100, 20);
+		contenidoActualizar.add(lblNombre);
+
+		JTextField textNombre = new JTextField();
+		textNombre.setEditable(true);
+		textNombre.setBounds(150, 58, 221, 20);
+		contenidoActualizar.add(textNombre);
+
+		JLabel lblDuracion = new JLabel("Duracion: ");
+		lblDuracion.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblDuracion.setBounds(20, 108, 100, 20);
+		contenidoActualizar.add(lblDuracion);
+
+		JTextField textDuracion = new JTextField();
+		textDuracion.setEditable(true);
+		textDuracion.setBounds(150, 108, 221, 20);
+		contenidoActualizar.add(textDuracion);
+
+		JButton btnActBBDD = new JButton("ACTUALIZAR");
+		btnActBBDD.setBounds(200, 425, 120, 30);
+		btnActBBDD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarBaseDatos(textNombre.getText(), textDuracion.getText());
+				actualizarDpsEps(textNombre.getText(), textDuracion.getText());
+				actualizarFrame.setVisible(false);
+			}
+		});
+		contenidoActualizar.add(btnActBBDD);
+
+	}
+
 	public void newFila(String a, String b, String c, String d, String e, String f) {
 
 		nombrePr = a;
@@ -372,10 +442,42 @@ public class Ataques extends JPanel {
 
 	}
 
+	public void actualizarDpsEps(String nombre, String duracion) {
+
+		int dur = Integer.parseInt(duracion);
+		int filasTotales = (tablaAt.getRowCount() - 1);
+		while (filasTotales != 0) {
+			if (nombre.equals(tablaAt.getValueAt(filasTotales, 0))) {
+				int dañoC = Integer.parseInt(tablaAt.getValueAt(filasTotales, 1).toString());
+				int cargaNrgC = Integer.parseInt(tablaAt.getValueAt(filasTotales, 2).toString());
+				int dpsN = dañoC / dur;
+				int epsN = cargaNrgC / dur;
+				String dpsText = Integer.toString(dpsN) + ".0";
+				String epsText = Integer.toString(epsN) + ".0";
+				actualizarBaseDatosDpsEps(nombre, dpsText, epsText);
+
+			}
+			filasTotales--;
+		}
+
+	}
+
 	public void añadirBaseDatos(String Nombre, String Daño, String CargaNrg, String DPS, String EPS, String Duracion) {
 
 		Conexion.EjecutarUpdate("INSERT INTO ataques VALUES (\"" + Nombre + "\", " + Daño + ", " + CargaNrg + ", " + DPS
 				+ ", " + EPS + ", " + Duracion + ");");
+
+	}
+
+	public void actualizarBaseDatos(String nombre, String duracion) {
+
+		Conexion.EjecutarUpdate("UPDATE ataques SET duracion = " + duracion + " WHERE nombre = \"" + nombre + "\";");
+
+	}
+
+	public void actualizarBaseDatosDpsEps(String nombre, String dps, String eps) {
+
+		Conexion.EjecutarUpdate("UPDATE ataques SET dps = "+dps+", eps = "+eps+" WHERE nombre = \"" + nombre + "\";");
 
 	}
 
