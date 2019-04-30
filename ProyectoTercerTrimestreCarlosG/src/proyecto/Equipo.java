@@ -51,14 +51,14 @@ public class Equipo extends JPanel {
 		tablaEq2.setFont(fuente);
 		eq.add(tablaEq2);
 		tablaEq2.setBounds(540, 110, 370, 90);
-		
+
 		tablaEq3 = new JTable(modeloEq3);
 		tablaEq3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		tablaEq3.setRowHeight(30);
 		tablaEq3.setFont(fuente);
 		eq.add(tablaEq3);
 		tablaEq3.setBounds(60, 380, 370, 90);
-		
+
 		tablaEq4 = new JTable(modeloEq4);
 		tablaEq4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		tablaEq4.setRowHeight(30);
@@ -127,7 +127,7 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(añadirNombre2);
-		
+
 		JButton guardarEq2 = new JButton("Guarda el equipo");
 		guardarEq2.setBounds(750, 70, 140, 23);
 		guardarEq2.addActionListener(new ActionListener() {
@@ -138,7 +138,7 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(guardarEq2);
-		
+
 		textNombreEq3 = new JTextField();
 		textNombreEq3.setEditable(true);
 		textNombreEq3.setBounds(60, 310, 180, 25);
@@ -169,7 +169,7 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(guardarEq3);
-		
+
 		textNombreEq4 = new JTextField();
 		textNombreEq4.setEditable(true);
 		textNombreEq4.setBounds(540, 310, 180, 25);
@@ -189,7 +189,7 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(añadirNombre4);
-		
+
 		JButton guardarEq4 = new JButton("Guarda el equipo");
 		guardarEq4.setBounds(750, 340, 140, 23);
 		guardarEq4.addActionListener(new ActionListener() {
@@ -200,7 +200,7 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(guardarEq4);
-		
+
 		sacarEquipo("1", nombreEq1, modeloEq1);
 		sacarEquipo("2", nombreEq2, modeloEq2);
 		sacarEquipo("3", nombreEq3, modeloEq3);
@@ -219,21 +219,27 @@ public class Equipo extends JPanel {
 				if (i == 0) {
 					String data = reader.nextLine();
 					nombre.setText(data);
+
 				} else if (i == 1) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 0, 0);
+
 				} else if (i == 2) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 0, 1);
+
 				} else if (i == 3) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 1, 0);
+
 				} else if (i == 4) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 1, 1);
+
 				} else if (i == 5) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 2, 0);
+
 				} else if (i == 6) {
 					String data = reader.nextLine();
 					modelo.setValueAt(data, 2, 1);
@@ -251,15 +257,26 @@ public class Equipo extends JPanel {
 
 		try {
 			FileWriter writer = new FileWriter("src/proyecto/EquipoGuardado" + n + ".txt");
-			String texto = "";
-			texto += nombre.getText() + "\n";
-			texto += modelo.getValueAt(0, 0) + "\n";
-			texto += modelo.getValueAt(0, 1) + "\n";
-			texto += modelo.getValueAt(1, 0) + "\n";
-			texto += modelo.getValueAt(1, 1) + "\n";
-			texto += modelo.getValueAt(2, 0) + "\n";
-			texto += modelo.getValueAt(2, 1) + "\n";
-			writer.write(texto);
+			String nombreEq = nombre.getText();
+			writer.write(nombreEq);
+			writer.write(System.lineSeparator());
+			String pkm1 = modelo.getValueAt(0, 0) + "";
+			writer.write(pkm1);
+			writer.write(System.lineSeparator());
+			String pkm2 = modelo.getValueAt(0, 1) + "";
+			writer.write(pkm2);
+			writer.write(System.lineSeparator());
+			String pkm3 = modelo.getValueAt(1, 0) + "";
+			writer.write(pkm3);
+			writer.write(System.lineSeparator());
+			String pkm4 = modelo.getValueAt(1, 1) + "";
+			writer.write(pkm4);
+			writer.write(System.lineSeparator());
+			String pkm5 = modelo.getValueAt(2, 0) + "";
+			writer.write(pkm5);
+			writer.write(System.lineSeparator());
+			String pkm6 = modelo.getValueAt(2, 1) + "";
+			writer.write(pkm6);
 			writer.close();
 			System.out.println("Se ha escrito en el fichero");
 		} catch (IOException e) {
