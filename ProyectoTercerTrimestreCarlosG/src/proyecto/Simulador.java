@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,12 +31,12 @@ import bbdd.Conexion;
 
 public class Simulador {
 
-	JTextField textNombreSim1, textNombreSim2;
+	JTextField textNombreSim1, textNombreSim2, textNombreEq1, textNombreEq2;
 	JTable tablaSim1, tablaSim2;
 	DefaultTableModel modeloSim1, modeloSim2;
 	int at1, def1, sta1, at2, def2, sta2;
 	String tipo1, tipo2, pkm1, pkm2, ganador;
-	JButton btnBuscarNombre1, btnBuscarNombre2;
+	JButton btnBuscarNombre1, btnBuscarNombre2, btnBuscarEq1, btnBuscarEq2;
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
@@ -178,6 +179,34 @@ public class Simulador {
 			}
 		});
 		sim.add(btnRandom);
+
+		textNombreEq1 = new JTextField();
+		textNombreEq1.setEditable(true);
+		textNombreEq1.setBounds(40, 230, 140, 30);
+		sim.add(textNombreEq1);
+
+		btnBuscarEq1 = new JButton("Elegir equipo");
+		btnBuscarEq1.setBounds(200, 230, 130, 30);
+		btnBuscarEq1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sacarEquipo(textNombreEq1);
+			}
+		});
+		sim.add(btnBuscarEq1);
+
+		textNombreEq2 = new JTextField();
+		textNombreEq2.setEditable(true);
+		textNombreEq2.setBounds(630, 230, 140, 30);
+		sim.add(textNombreEq2);
+
+		btnBuscarEq2 = new JButton("Elegir equipo");
+		btnBuscarEq2.setBounds(790, 230, 130, 30);
+		btnBuscarEq2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sacarEquipo(textNombreEq2);
+			}
+		});
+		sim.add(btnBuscarEq2);
 
 		vida1 = new JLabel();
 		vida1.setFont(new Font("NSimSun", Font.BOLD, 20));
@@ -389,6 +418,46 @@ public class Simulador {
 		time.addActionListener(listener);
 		time.start();
 
+	}
+
+	public void combatePorEquipos(JTextField textNombreEq) {
+
+	}
+
+	public void sacarEquipo(JTextField nombreField) {
+
+		Scanner reader1 = crearReader(1);
+		Scanner reader2 = crearReader(2);
+		Scanner reader3 = crearReader(3);
+		Scanner reader4 = crearReader(4);
+		String nombreEqReader1 = reader1.nextLine();
+		String nombreEqReader2 = reader2.nextLine();
+		String nombreEqReader3 = reader3.nextLine();
+		String nombreEqReader4 = reader4.nextLine();
+		if(nombreEqReader1.equals(nombreField.getText())) {
+			System.out.println("equipo1 func");
+		}else if(nombreEqReader2.equals(nombreField.getText())) {
+			System.out.println("equipo2 func");
+		}else if(nombreEqReader3.equals(nombreField.getText())) {
+			System.out.println("equipo3 func");
+		}else if(nombreEqReader4.equals(nombreField.getText())) {
+			System.out.println("equipo4 func");
+		}
+		
+		
+	}
+
+	public Scanner crearReader(int n) {
+
+		String ruta = "src/proyecto/EquipoGuardado" + n + ".txt";
+		File fichero = new File(ruta);
+		Scanner reader = null;
+		try {
+			reader = new Scanner(fichero);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return reader;
 	}
 
 	public int daño(int at, int def) {

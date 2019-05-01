@@ -24,6 +24,7 @@ public class Equipo extends JPanel {
 	JTable tablaEq1, tablaEq2, tablaEq3, tablaEq4;
 	DefaultTableModel modeloEq1, modeloEq2, modeloEq3, modeloEq4;
 	JTextField textNombreEq1, textNombreEq2, textNombreEq3, textNombreEq4;
+	JLabel nombreEq1, nombreEq2, nombreEq3, nombreEq4;
 
 	public Equipo() {
 
@@ -82,7 +83,7 @@ public class Equipo extends JPanel {
 		textNombreEq1.setBounds(60, 40, 180, 25);
 		eq.add(textNombreEq1);
 
-		JLabel nombreEq1 = new JLabel();
+		nombreEq1 = new JLabel();
 		nombreEq1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		nombreEq1.setBounds(60, 80, 200, 25);
 		nombreEq1.setForeground(Color.red);
@@ -113,7 +114,7 @@ public class Equipo extends JPanel {
 		textNombreEq2.setBounds(540, 40, 180, 25);
 		eq.add(textNombreEq2);
 
-		JLabel nombreEq2 = new JLabel();
+		nombreEq2 = new JLabel();
 		nombreEq2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		nombreEq2.setBounds(540, 80, 200, 25);
 		nombreEq2.setForeground(Color.red);
@@ -144,7 +145,7 @@ public class Equipo extends JPanel {
 		textNombreEq3.setBounds(60, 310, 180, 25);
 		eq.add(textNombreEq3);
 
-		JLabel nombreEq3 = new JLabel();
+		nombreEq3 = new JLabel();
 		nombreEq3.setFont(new Font("Tahoma", Font.BOLD, 16));
 		nombreEq3.setBounds(60, 350, 200, 25);
 		nombreEq3.setForeground(Color.red);
@@ -175,7 +176,7 @@ public class Equipo extends JPanel {
 		textNombreEq4.setBounds(540, 310, 180, 25);
 		eq.add(textNombreEq4);
 
-		JLabel nombreEq4 = new JLabel();
+		nombreEq4 = new JLabel();
 		nombreEq4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		nombreEq4.setBounds(540, 350, 200, 25);
 		nombreEq4.setForeground(Color.red);
@@ -200,11 +201,8 @@ public class Equipo extends JPanel {
 			}
 		});
 		eq.add(guardarEq4);
-
-		sacarEquipo("1", nombreEq1, modeloEq1);
-		sacarEquipo("2", nombreEq2, modeloEq2);
-		sacarEquipo("3", nombreEq3, modeloEq3);
-		sacarEquipo("4", nombreEq4, modeloEq4);
+		
+		rellenarDatos();
 
 	}
 
@@ -283,6 +281,29 @@ public class Equipo extends JPanel {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void rellenarDatos() {
+		sacarEquipo("1", nombreEq1, modeloEq1);
+		sacarEquipo("2", nombreEq2, modeloEq2);
+		sacarEquipo("3", nombreEq3, modeloEq3);
+		sacarEquipo("4", nombreEq4, modeloEq4);
+	}
+
+	public String getStrNombreEq1() {
+		return nombreEq1.getText();
+	}
+
+	public String getStrNombreEq2() {
+		return nombreEq2.getText();
+	}
+
+	public String getStrNombreEq3() {
+		return nombreEq3.getText();
+	}
+
+	public String getStrNombreEq4() {
+		return nombreEq4.getText();
 	}
 
 }
