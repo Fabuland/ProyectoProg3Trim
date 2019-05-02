@@ -34,7 +34,7 @@ public class Simulador {
 	JTextField textNombreSim1, textNombreSim2, textNombreEq1, textNombreEq2;
 	JTable tablaSim1, tablaSim2;
 	DefaultTableModel modeloSim1, modeloSim2;
-	int at1, def1, sta1, at2, def2, sta2;
+	int at1, def1, sta1, at2, def2, sta2, numTxt1, numTxt2, staEqRest1, staEqRest2;
 	String tipo1, tipo2, pkm1, pkm2, ganador;
 	JButton btnBuscarNombre1, btnBuscarNombre2, btnBuscarEq1, btnBuscarEq2;
 	Boolean existePkm1, existePkm2;
@@ -158,7 +158,7 @@ public class Simulador {
 		sim.add(gengar);
 
 		JButton btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
-		btnCombatir.setBounds(400, 356, 160, 68);
+		btnCombatir.setBounds(400, 340, 160, 45);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (existePkm1 && existePkm2) {
@@ -170,6 +170,17 @@ public class Simulador {
 			}
 		});
 		sim.add(btnCombatir);
+
+		JButton btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
+		btnCombatirEquipos.setBounds(400, 390, 160, 45);
+		btnCombatirEquipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				numTxt1 = sacarEquipo(textNombreEq1);
+				numTxt2 = sacarEquipo(textNombreEq2);
+				combatePorEquipos(numTxt1, numTxt2);
+			}
+		});
+		sim.add(btnCombatirEquipos);
 
 		JButton btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
 		btnRandom.setBounds(440, 240, 80, 40);
@@ -420,11 +431,33 @@ public class Simulador {
 
 	}
 
-	public void combatePorEquipos(JTextField textNombreEq) {
+	public void combatePorEquipos(int n1, int n2) {
+		Scanner reader1 = crearReader(n1);
+		Scanner reader2 = crearReader(n2);
+		reader1.nextLine();
+		reader2.nextLine();
+		Timer time = new Timer(250, null);
+		while (reader1.hasNext() || reader2.hasNext()) {
+			ActionListener listener = new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					String pokActual1 = reader1.nextLine();
+					System.out.println(pokActual1);
+					buscarYAsignarStats1(pokActual1, nombrePkm1);
+
+					String pokActual2 = reader2.nextLine();
+					System.out.println(pokActual2);
+					buscarYAsignarStats1(pokActual2, nombrePkm2);
+
+				}
+			};
+			time.addActionListener(listener);
+			time.start();
+		}
 
 	}
 
-	public void sacarEquipo(JTextField nombreField) {
+	public int sacarEquipo(JTextField nombreField) {
 
 		Scanner reader1 = crearReader(1);
 		Scanner reader2 = crearReader(2);
@@ -434,17 +467,23 @@ public class Simulador {
 		String nombreEqReader2 = reader2.nextLine();
 		String nombreEqReader3 = reader3.nextLine();
 		String nombreEqReader4 = reader4.nextLine();
-		if(nombreEqReader1.equals(nombreField.getText())) {
+		if (nombreEqReader1.equals(nombreField.getText())) {
 			System.out.println("equipo1 func");
-		}else if(nombreEqReader2.equals(nombreField.getText())) {
+			return 1;
+		} else if (nombreEqReader2.equals(nombreField.getText())) {
 			System.out.println("equipo2 func");
-		}else if(nombreEqReader3.equals(nombreField.getText())) {
+			return 2;
+		} else if (nombreEqReader3.equals(nombreField.getText())) {
 			System.out.println("equipo3 func");
-		}else if(nombreEqReader4.equals(nombreField.getText())) {
+			return 3;
+		} else if (nombreEqReader4.equals(nombreField.getText())) {
 			System.out.println("equipo4 func");
+			return 4;
+		} else {
+			JOptionPane.showMessageDialog(null, "No hay equipos con este nombre");
+			return 0;
 		}
-		
-		
+
 	}
 
 	public Scanner crearReader(int n) {
