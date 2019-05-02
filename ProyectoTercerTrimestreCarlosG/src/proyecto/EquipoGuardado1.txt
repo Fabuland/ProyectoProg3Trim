@@ -1,7 +1,7 @@
-Prueba1
+1
 Dragonite
-Dragonair
-Dratini
-Pikachu
-Digglet
-Raichu
+Mewtwo
+Gyarados
+Blastoise
+Charizard
+Alakazam

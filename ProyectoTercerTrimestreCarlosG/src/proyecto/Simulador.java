@@ -34,14 +34,17 @@ public class Simulador {
 	JTextField textNombreSim1, textNombreSim2, textNombreEq1, textNombreEq2;
 	JTable tablaSim1, tablaSim2;
 	DefaultTableModel modeloSim1, modeloSim2;
-	int at1, def1, sta1, at2, def2, sta2, numTxt1, numTxt2, staEqRest1, staEqRest2;
+	int at1, def1, sta1, at2, def2, sta2, numTxt1, numTxt2, staEqRest1, staEqRest2, puntosEq1, puntosEq2;
 	String tipo1, tipo2, pkm1, pkm2, ganador;
-	JButton btnBuscarNombre1, btnBuscarNombre2, btnBuscarEq1, btnBuscarEq2;
+	JButton btnBuscarNombre1, btnBuscarNombre2, btnBuscarEq1, btnBuscarEq2, btnCombatir, btnCombatirEquipos, btnRandom,
+			btnPlacebo;
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
 	JLabel nombrePkm1, nombrePkm2, gengar;
 	JLabel efectivo1, efectivo2;
+	Scanner reader1, reader2;
+	int contLineas = 1;
 
 	public Simulador() {
 
@@ -157,7 +160,7 @@ public class Simulador {
 		gengar.setBounds(440, 130, 80, 80);
 		sim.add(gengar);
 
-		JButton btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
+		btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
 		btnCombatir.setBounds(400, 340, 160, 45);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -171,18 +174,32 @@ public class Simulador {
 		});
 		sim.add(btnCombatir);
 
-		JButton btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
+		btnPlacebo = new JButton();
+		btnPlacebo.setBounds(400, 352, 0, 0);
+		btnPlacebo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				combate();
+				gengar.setIcon(new ImageIcon("src\\proyecto\\pic\\gengar.gif"));
+			}
+		});
+		sim.add(btnCombatir);
+
+		btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
 		btnCombatirEquipos.setBounds(400, 390, 160, 45);
 		btnCombatirEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				numTxt1 = sacarEquipo(textNombreEq1);
 				numTxt2 = sacarEquipo(textNombreEq2);
-				combatePorEquipos(numTxt1, numTxt2);
+				if ((numTxt1 > 0 && numTxt1 <= 4) && (numTxt2 > 0 && numTxt2 <= 4)) {
+					combatePorEquipos(numTxt1, numTxt2);
+				} else {
+					JOptionPane.showMessageDialog(null, "Elige 2 equipos existentes");
+				}
 			}
 		});
 		sim.add(btnCombatirEquipos);
 
-		JButton btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
+		btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
 		btnRandom.setBounds(440, 240, 80, 40);
 		btnRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,6 +364,10 @@ public class Simulador {
 			int staRest2 = sta2;
 
 			public void actionPerformed(ActionEvent e) {
+				if (time.isRunning()) {
+					btnCombatir.setEnabled(false);
+					btnPlacebo.setEnabled(false);
+				}
 				staRest1 -= dañoF2;
 				staRest2 -= dañoF1;
 				if (staRest1 < 0) {
@@ -399,8 +420,10 @@ public class Simulador {
 					pkm2 = nombrePkm2.getText();
 					if (staRest1 == 0) {
 						ganador = nombrePkm2.getText();
+
 					} else if (staRest2 == 0) {
 						ganador = nombrePkm1.getText();
+
 					}
 
 					System.out.println(pkm1 + pkm2 + ganador);
@@ -415,9 +438,15 @@ public class Simulador {
 				if (staRest1 == 0) {
 					gengar.setIcon(null);
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!");
+					btnCombatir.setEnabled(true);
+					btnPlacebo.setEnabled(true);
+					ganador = nombrePkm2.getText();
 				} else if (staRest2 == 0) {
 					gengar.setIcon(null);
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!");
+					btnCombatir.setEnabled(true);
+					btnPlacebo.setEnabled(true);
+					ganador = nombrePkm1.getText();
 				} else if (staRest1 == 0 && staRest2 == 0) {
 					System.out.println("empate");
 				}
@@ -432,28 +461,80 @@ public class Simulador {
 	}
 
 	public void combatePorEquipos(int n1, int n2) {
-		Scanner reader1 = crearReader(n1);
-		Scanner reader2 = crearReader(n2);
-		reader1.nextLine();
-		reader2.nextLine();
-		Timer time = new Timer(250, null);
-		while (reader1.hasNext() || reader2.hasNext()) {
-			ActionListener listener = new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					String pokActual1 = reader1.nextLine();
-					System.out.println(pokActual1);
-					buscarYAsignarStats1(pokActual1, nombrePkm1);
+		if (contLineas < 5) {
 
-					String pokActual2 = reader2.nextLine();
-					System.out.println(pokActual2);
-					buscarYAsignarStats1(pokActual2, nombrePkm2);
+			barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
+			barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 
-				}
-			};
-			time.addActionListener(listener);
-			time.start();
+			reader1 = crearReader(numTxt1);
+			reader2 = crearReader(numTxt2);
+			for (int i = 0; i < contLineas; i++) {
+				reader1.nextLine();
+				reader2.nextLine();
+			}
+			String pokActual1 = reader1.nextLine();
+			buscarYAsignarStats1(pokActual1, nombrePkm1);
+			String pokActual2 = reader2.nextLine();
+			buscarYAsignarStats2(pokActual2, nombrePkm2);
+			btnPlacebo.doClick();
+			contLineas++;
+			
+			JOptionPane.showMessageDialog(null, "xdd");
+			System.out.println(ganador + " xddddd");
+			if (pokActual1.equals(ganador)) {
+				puntosEq1++;
+				System.out.println(nombrePkm1.getText());
+				System.out.println("gana1");
+			} else if (pokActual1.equals(ganador)) {
+				puntosEq2++;
+				System.out.println(nombrePkm1.getText());
+				System.out.println("gana2");
+			}
+			System.out.println(puntosEq1);
+			System.out.println(puntosEq2);
+
+		} else if (contLineas == 5) {
+			if (puntosEq1 > puntosEq2) {
+				System.out.println("gana equipo 1");
+			} else if (puntosEq2 > puntosEq1) {
+				System.out.println("gana equipo 2");
+			} else {
+				System.out.println("empate");
+			}
 		}
+
+	}
+
+	public void combatePorEquipoInterno() {
+
+		int daño1 = daño(at1, def2);
+		int daño2 = daño(at2, def1);
+		String tipo1 = (String) modeloSim1.getValueAt(0, 3);
+		String tipo2 = (String) modeloSim2.getValueAt(0, 3);
+		int dañoF1 = 3;
+		int dañoF2 = 5;
+		staEqRest1 = sta1;
+		staEqRest2 = sta2;
+		Timer time = new Timer(250, null);
+		ActionListener listener = new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if (time.isRunning()) {
+					btnCombatir.setEnabled(false);
+				}
+				staEqRest1 -= dañoF2;
+				staEqRest2 -= dañoF1;
+				if (staEqRest1 < 0) {
+					staEqRest1 = 0;
+				} else if (staEqRest2 < 0) {
+					staEqRest2 = 0;
+				}
+				vida1.setText(staEqRest1 + "/" + sta1);
+				vida2.setText(staEqRest2 + "/" + sta2);
+			}
+		};
+		time.addActionListener(listener);
+		time.start();
 
 	}
 
@@ -468,19 +549,19 @@ public class Simulador {
 		String nombreEqReader3 = reader3.nextLine();
 		String nombreEqReader4 = reader4.nextLine();
 		if (nombreEqReader1.equals(nombreField.getText())) {
-			System.out.println("equipo1 func");
+
 			return 1;
 		} else if (nombreEqReader2.equals(nombreField.getText())) {
-			System.out.println("equipo2 func");
+
 			return 2;
 		} else if (nombreEqReader3.equals(nombreField.getText())) {
-			System.out.println("equipo3 func");
+
 			return 3;
 		} else if (nombreEqReader4.equals(nombreField.getText())) {
-			System.out.println("equipo4 func");
+
 			return 4;
 		} else {
-			JOptionPane.showMessageDialog(null, "No hay equipos con este nombre");
+
 			return 0;
 		}
 

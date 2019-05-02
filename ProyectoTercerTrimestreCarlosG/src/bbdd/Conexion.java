@@ -10,7 +10,7 @@ public class Conexion {
 
 	static String timezone = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	static String dbName = "pokemondatabase";
-	static String url = "jdbc:mysql://127.0.0.1/" + dbName + timezone;
+	static String url = "jdbc:mysql://localhost:3308/" + dbName + timezone;
 	static String user = "root";
 	static String pass = "manolo";
 	// static String driver = "com.mysql.cj.jdbc.Driver";

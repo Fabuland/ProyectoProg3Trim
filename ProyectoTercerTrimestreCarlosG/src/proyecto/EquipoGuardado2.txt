@@ -1,7 +1,7 @@
-Prueba2
-Venusaur
-Pidgeot
-Ivysaur
+2
 Pidgey
-Bulbasaur
-Charmander
+Caterpie
+Weedle
+Magikarp
+Rattata
+Ekans
