@@ -1,7 +1,7 @@
-1
-Charizard
-Mewtwo
-Charizard
-Oddish
-Charizard
+Zafiro
+Pinsir
+Arcanine
+Aerodactyl
+Tauros
+Jynx
 Oddish

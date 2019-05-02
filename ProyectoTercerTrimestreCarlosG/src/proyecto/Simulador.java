@@ -36,7 +36,7 @@ public class Simulador {
 	DefaultTableModel modeloSim1, modeloSim2;
 	int at1, def1, sta1, at2, def2, sta2, numTxt1, numTxt2, staEqRest1, staEqRest2, puntosEq1, puntosEq2;
 	String tipo1, tipo2, pkm1, pkm2, ganador;
-	JButton btnBuscarNombre1, btnBuscarNombre2, btnBuscarEq1, btnBuscarEq2, btnCombatir, btnCombatirEquipos, btnRandom,
+	JButton btnBuscarNombre1, btnBuscarNombre2, btnCombatir, btnCombatirEquipos, btnRandom,
 			btnPlacebo;
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
@@ -86,7 +86,7 @@ public class Simulador {
 		btnBuscarNombre1.setBounds(200, 60, 70, 30);
 		btnBuscarNombre1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				existePkm1 = buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
+				buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
 				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida1.setText(sta1 + "/" + sta1);
 				efectivo1.setText("");
@@ -116,7 +116,7 @@ public class Simulador {
 
 		textNombreSim2 = new JTextField();
 		textNombreSim2.setEditable(true);
-		textNombreSim2.setBounds(690, 60, 140, 30);
+		textNombreSim2.setBounds(780, 60, 140, 30);
 		sim.add(textNombreSim2);
 
 		nombrePkm2 = new JLabel("");
@@ -126,10 +126,10 @@ public class Simulador {
 		sim.add(nombrePkm2);
 
 		btnBuscarNombre2 = new JButton("Elegir");
-		btnBuscarNombre2.setBounds(850, 60, 70, 30);
+		btnBuscarNombre2.setBounds(690, 60, 70, 30);
 		btnBuscarNombre2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				existePkm2 = buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
+				buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
 				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 				vida2.setText(sta2 + "/" + sta2);
 				efectivo2.setText("");
@@ -161,7 +161,7 @@ public class Simulador {
 		sim.add(gengar);
 
 		btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
-		btnCombatir.setBounds(400, 340, 160, 45);
+		btnCombatir.setBounds(400, 345, 160, 45);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (existePkm1 && existePkm2) {
@@ -184,8 +184,8 @@ public class Simulador {
 		});
 		sim.add(btnCombatir);
 
-		btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
-		btnCombatirEquipos.setBounds(400, 390, 160, 45);
+		btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\teamfight.png"));
+		btnCombatirEquipos.setBounds(420, 230, 120, 30);
 		btnCombatirEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				numTxt1 = sacarEquipo(textNombreEq1);
@@ -198,9 +198,22 @@ public class Simulador {
 			}
 		});
 		sim.add(btnCombatirEquipos);
+		
+		JButton btnReiniciar = new JButton("Restart");
+		btnReiniciar.setBounds(440, 270, 80, 20);
+		btnReiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contLineas = 1;
+				puntosEq1 = 0;
+				puntosEq2 = 0;
+				ganador = "";
+				System.out.println(ganador);
+			}
+		});
+		sim.add(btnReiniciar);
 
 		btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
-		btnRandom.setBounds(440, 240, 80, 40);
+		btnRandom.setBounds(440, 395, 80, 40);
 		btnRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				randomCombat();
@@ -210,31 +223,23 @@ public class Simulador {
 
 		textNombreEq1 = new JTextField();
 		textNombreEq1.setEditable(true);
-		textNombreEq1.setBounds(40, 230, 140, 30);
+		textNombreEq1.setBounds(170, 230, 140, 30);
 		sim.add(textNombreEq1);
 
-		btnBuscarEq1 = new JButton("Elegir equipo");
-		btnBuscarEq1.setBounds(200, 230, 130, 30);
-		btnBuscarEq1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sacarEquipo(textNombreEq1);
-			}
-		});
-		sim.add(btnBuscarEq1);
+		JLabel lblElegiEq1 = new JLabel("Elige equipo");
+		lblElegiEq1.setBounds(40, 230, 130, 30);
+		lblElegiEq1.setFont(fuente);
+		sim.add(lblElegiEq1);
 
 		textNombreEq2 = new JTextField();
 		textNombreEq2.setEditable(true);
-		textNombreEq2.setBounds(630, 230, 140, 30);
+		textNombreEq2.setBounds(645, 230, 140, 30);
 		sim.add(textNombreEq2);
 
-		btnBuscarEq2 = new JButton("Elegir equipo");
-		btnBuscarEq2.setBounds(790, 230, 130, 30);
-		btnBuscarEq2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				sacarEquipo(textNombreEq2);
-			}
-		});
-		sim.add(btnBuscarEq2);
+		JLabel lblElegiEq2 = new JLabel("Elige equipo");
+		lblElegiEq2.setBounds(805, 230, 130, 30);
+		lblElegiEq2.setFont(fuente);
+		sim.add(lblElegiEq2);
 
 		vida1 = new JLabel();
 		vida1.setFont(new Font("NSimSun", Font.BOLD, 20));
@@ -280,8 +285,8 @@ public class Simulador {
 
 	}
 
-	public boolean buscarYAsignarStats1(String nombre, JLabel nombreLbl) {
-		boolean existe = false;
+	public void buscarYAsignarStats1(String nombre, JLabel nombreLbl) {
+		existePkm1 = false;
 		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
 		try {
 			while (buscarNombre.next()) {
@@ -290,20 +295,20 @@ public class Simulador {
 					def1 = buscarNombre.getInt("defensa");
 					sta1 = buscarNombre.getInt("stamina");
 					tipo1 = buscarNombre.getString("tipo");
-					existe = true;
+					existePkm1 = true;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		if (existe == true) {
+		if (existePkm1 == true) {
 			nombreLbl.setText(nombre);
 			modeloSim1.setValueAt(at1, 0, 0);
 			modeloSim1.setValueAt(def1, 0, 1);
 			modeloSim1.setValueAt(sta1, 0, 2);
 			modeloSim1.setValueAt(tipo1, 0, 3);
-		} else if (existe == false) {
+		} else if (existePkm1 == false) {
 			nombreLbl.setText("");
 			modeloSim1.setValueAt(null, 0, 0);
 			modeloSim1.setValueAt(null, 0, 1);
@@ -311,12 +316,10 @@ public class Simulador {
 			modeloSim1.setValueAt(null, 0, 3);
 			JOptionPane.showMessageDialog(null, "El Pokémon no existe");
 		}
-
-		return existe;
 	}
 
-	public boolean buscarYAsignarStats2(String nombre, JLabel nombreLbl) {
-		boolean existe = false;
+	public void buscarYAsignarStats2(String nombre, JLabel nombreLbl) {
+		existePkm2 = false;
 		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
 		try {
 			while (buscarNombre.next()) {
@@ -325,20 +328,20 @@ public class Simulador {
 					def2 = buscarNombre.getInt("defensa");
 					sta2 = buscarNombre.getInt("stamina");
 					tipo2 = buscarNombre.getString("tipo");
-					existe = true;
+					existePkm2 = true;
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		if (existe == true) {
+		if (existePkm2 == true) {
 			nombreLbl.setText(nombre);
 			modeloSim2.setValueAt(at2, 0, 0);
 			modeloSim2.setValueAt(def2, 0, 1);
 			modeloSim2.setValueAt(sta2, 0, 2);
 			modeloSim2.setValueAt(tipo2, 0, 3);
-		} else if (existe == false) {
+		} else if (existePkm2 == false) {
 			nombreLbl.setText("");
 			modeloSim2.setValueAt(null, 0, 0);
 			modeloSim2.setValueAt(null, 0, 1);
@@ -346,8 +349,6 @@ public class Simulador {
 			modeloSim2.setValueAt(null, 0, 3);
 			JOptionPane.showMessageDialog(null, "El Pokémon no existe");
 		}
-
-		return existe;
 	}
 
 	public void combate() {
@@ -367,6 +368,7 @@ public class Simulador {
 				if (time.isRunning()) {
 					btnCombatir.setEnabled(false);
 					btnPlacebo.setEnabled(false);
+					btnCombatirEquipos.setEnabled(false);
 				}
 				staRest1 -= dañoF2;
 				staRest2 -= dañoF1;
@@ -430,7 +432,6 @@ public class Simulador {
 					try {
 						registrarBatallas(pkm1, pkm2, ganador);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -440,12 +441,14 @@ public class Simulador {
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!");
 					btnCombatir.setEnabled(true);
 					btnPlacebo.setEnabled(true);
+					btnCombatirEquipos.setEnabled(true);
 					ganador = nombrePkm2.getText();
 				} else if (staRest2 == 0) {
 					gengar.setIcon(null);
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!");
 					btnCombatir.setEnabled(true);
 					btnPlacebo.setEnabled(true);
+					btnCombatirEquipos.setEnabled(true);
 					ganador = nombrePkm1.getText();
 				} else if (staRest1 == 0 && staRest2 == 0) {
 					JOptionPane.showMessageDialog(null, "Empate");
@@ -462,7 +465,6 @@ public class Simulador {
 
 	public void combatePorEquipos(int n1, int n2) {
 		if (contLineas < 7) {
-			System.out.println(ganador + " xddddd");
 			if (nombrePkm1.getText().equals(ganador)) {
 				puntosEq1++;
 			} else if (nombrePkm2.getText().equals(ganador)) {
@@ -483,56 +485,25 @@ public class Simulador {
 			buscarYAsignarStats2(pokActual2, nombrePkm2);
 			btnPlacebo.doClick();
 			contLineas++;
-
+			System.out.println(puntosEq1+"  //  "+puntosEq2);
 		} else if ((puntosEq1+puntosEq2) < 6) {
 			if (nombrePkm1.getText().equals(ganador)) {
 				puntosEq1++;
 			} else if (nombrePkm2.getText().equals(ganador)) {
 				puntosEq2++;
 			}
+			System.out.println(puntosEq1+"  //  "+puntosEq2);
 		}
 		if((puntosEq1+puntosEq2) == 6) {
 			if (puntosEq1 > puntosEq2) {
-				JOptionPane.showMessageDialog(null, "Gana el equipo 1");
+				JOptionPane.showMessageDialog(null, "Gana el equipo "+textNombreEq1.getText());
 			} else if (puntosEq2 > puntosEq1) {
-				JOptionPane.showMessageDialog(null, "Gana el equipo 2");
+				JOptionPane.showMessageDialog(null, "Gana el equipo "+textNombreEq2.getText());
 			} else {
 				JOptionPane.showMessageDialog(null, "Empate");
 			}
+			System.out.println(puntosEq1+"  //  "+puntosEq2);
 		}
-	}
-
-	public void combatePorEquipoInterno() {
-
-		int daño1 = daño(at1, def2);
-		int daño2 = daño(at2, def1);
-		String tipo1 = (String) modeloSim1.getValueAt(0, 3);
-		String tipo2 = (String) modeloSim2.getValueAt(0, 3);
-		int dañoF1 = 3;
-		int dañoF2 = 5;
-		staEqRest1 = sta1;
-		staEqRest2 = sta2;
-		Timer time = new Timer(250, null);
-		ActionListener listener = new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (time.isRunning()) {
-					btnCombatir.setEnabled(false);
-				}
-				staEqRest1 -= dañoF2;
-				staEqRest2 -= dañoF1;
-				if (staEqRest1 < 0) {
-					staEqRest1 = 0;
-				} else if (staEqRest2 < 0) {
-					staEqRest2 = 0;
-				}
-				vida1.setText(staEqRest1 + "/" + sta1);
-				vida2.setText(staEqRest2 + "/" + sta2);
-			}
-		};
-		time.addActionListener(listener);
-		time.start();
-
 	}
 
 	public int sacarEquipo(JTextField nombreField) {
