@@ -41,7 +41,7 @@ public class Simulador {
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
-	JLabel nombrePkm1, nombrePkm2, gengar;
+	JLabel nombrePkm1, nombrePkm2, gengar, logoTipo1, logoTipo2;
 	JLabel efectivo1, efectivo2;
 	Scanner reader1, reader2;
 	int contLineas = 1;
@@ -260,6 +260,11 @@ public class Simulador {
 		efectivo2.setFont(new Font("NSimSun", Font.BOLD, 20));
 		efectivo2.setBounds(680, 290, 220, 30);
 		sim.add(efectivo2);
+		
+		logoTipo1 = new JLabel();
+		logoTipo1.setBounds(290, 6, 150, 40);
+		logoTipo1.setForeground(Color.black);
+		sim.add(logoTipo1);
 
 		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
 			public void paintComponent(Graphics g) {
@@ -271,6 +276,12 @@ public class Simulador {
 		barraVida1.setBounds(40, 340, 340, 100);
 		sim.add(barraVida1);
 		barraVida1.add(nombrePkm1);
+		barraVida1.add(logoTipo1);
+		
+		logoTipo2 = new JLabel();
+		logoTipo2.setBounds(290, 6, 150, 40);
+		logoTipo2.setForeground(Color.black);
+		sim.add(logoTipo2);
 
 		barraVida2 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
 			public void paintComponent(Graphics g) {
@@ -282,6 +293,7 @@ public class Simulador {
 		barraVida2.setBounds(580, 340, 340, 100);
 		sim.add(barraVida2);
 		barraVida2.add(nombrePkm2);
+		barraVida2.add(logoTipo2);
 
 	}
 
@@ -308,12 +320,14 @@ public class Simulador {
 			modeloSim1.setValueAt(def1, 0, 1);
 			modeloSim1.setValueAt(sta1, 0, 2);
 			modeloSim1.setValueAt(tipo1, 0, 3);
+			cambiarLogoTipo(modeloSim1, logoTipo1);
 		} else if (existePkm1 == false) {
 			nombreLbl.setText("");
 			modeloSim1.setValueAt(null, 0, 0);
 			modeloSim1.setValueAt(null, 0, 1);
 			modeloSim1.setValueAt(null, 0, 2);
 			modeloSim1.setValueAt(null, 0, 3);
+			logoTipo1.setText(null);
 			JOptionPane.showMessageDialog(null, "El Pokémon no existe");
 		}
 	}
@@ -341,12 +355,14 @@ public class Simulador {
 			modeloSim2.setValueAt(def2, 0, 1);
 			modeloSim2.setValueAt(sta2, 0, 2);
 			modeloSim2.setValueAt(tipo2, 0, 3);
+			cambiarLogoTipo(modeloSim2, logoTipo2);
 		} else if (existePkm2 == false) {
 			nombreLbl.setText("");
 			modeloSim2.setValueAt(null, 0, 0);
 			modeloSim2.setValueAt(null, 0, 1);
 			modeloSim2.setValueAt(null, 0, 2);
 			modeloSim2.setValueAt(null, 0, 3);
+			logoTipo2.setText(null);
 			JOptionPane.showMessageDialog(null, "El Pokémon no existe");
 		}
 	}
@@ -598,6 +614,44 @@ public class Simulador {
 		writer.write(System.lineSeparator());
 		reader.close();
 		writer.close();
+	}
+	
+	public void cambiarLogoTipo(DefaultTableModel modelo, JLabel logo) {
+		if(modelo.getValueAt(0, 3).equals("Bicho")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\bicho.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Acero")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\acero.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Fuego")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\fuego.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Agua")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\agua.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Planta")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\planta.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Tierra")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\tierra.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Roca")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\roca.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Electrico")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\electrico.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Volador")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\volador.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Psiquico")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\psiquico.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Veneno")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\veneno.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Lucha")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\lucha.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Normal")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\normal.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Fantasma")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\fantasma.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Dragon")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\dragon.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Hielo")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\hielo.png"));
+		}else if(modelo.getValueAt(0, 3).equals("Siniestro")) {
+			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\siniestro.png"));
+		}
 	}
 
 	public int dañoPorTipo(String tipoAt, String tipoDef, int dañoAt, JLabel efectivo) {
