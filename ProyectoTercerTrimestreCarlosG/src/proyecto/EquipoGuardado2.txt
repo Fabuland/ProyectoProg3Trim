@@ -1,7 +1,7 @@
-Planta
+Prueba2
 Venusaur
-Sceptile
+Pidgeot
 Ivysaur
-Exeggutor
-Roselia
-Roserade
+Pidgey
+Bulbasaur
+Charmander

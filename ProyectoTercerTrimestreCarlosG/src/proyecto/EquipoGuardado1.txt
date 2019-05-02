@@ -1,7 +1,7 @@
-Dragon
+Prueba1
 Dragonite
 Dragonair
 Dratini
-Bagon
-Shellgon
-Salamance
+Pikachu
+Digglet
+Raichu
