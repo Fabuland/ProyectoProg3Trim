@@ -1,7 +1,7 @@
 1
-Dragonite
-Mewtwo
-Gyarados
-Blastoise
 Charizard
-Alakazam
+Mewtwo
+Charizard
+Oddish
+Charizard
+Oddish

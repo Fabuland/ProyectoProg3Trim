@@ -448,7 +448,7 @@ public class Simulador {
 					btnPlacebo.setEnabled(true);
 					ganador = nombrePkm1.getText();
 				} else if (staRest1 == 0 && staRest2 == 0) {
-					System.out.println("empate");
+					JOptionPane.showMessageDialog(null, "Empate");
 				}
 
 			}
@@ -461,8 +461,13 @@ public class Simulador {
 	}
 
 	public void combatePorEquipos(int n1, int n2) {
-		if (contLineas < 5) {
-
+		if (contLineas < 7) {
+			System.out.println(ganador + " xddddd");
+			if (nombrePkm1.getText().equals(ganador)) {
+				puntosEq1++;
+			} else if (nombrePkm2.getText().equals(ganador)) {
+				puntosEq2++;
+			}
 			barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 			barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
 
@@ -478,31 +483,23 @@ public class Simulador {
 			buscarYAsignarStats2(pokActual2, nombrePkm2);
 			btnPlacebo.doClick();
 			contLineas++;
-			
-			JOptionPane.showMessageDialog(null, "xdd");
-			System.out.println(ganador + " xddddd");
-			if (pokActual1.equals(ganador)) {
-				puntosEq1++;
-				System.out.println(nombrePkm1.getText());
-				System.out.println("gana1");
-			} else if (pokActual1.equals(ganador)) {
-				puntosEq2++;
-				System.out.println(nombrePkm1.getText());
-				System.out.println("gana2");
-			}
-			System.out.println(puntosEq1);
-			System.out.println(puntosEq2);
 
-		} else if (contLineas == 5) {
-			if (puntosEq1 > puntosEq2) {
-				System.out.println("gana equipo 1");
-			} else if (puntosEq2 > puntosEq1) {
-				System.out.println("gana equipo 2");
-			} else {
-				System.out.println("empate");
+		} else if ((puntosEq1+puntosEq2) < 6) {
+			if (nombrePkm1.getText().equals(ganador)) {
+				puntosEq1++;
+			} else if (nombrePkm2.getText().equals(ganador)) {
+				puntosEq2++;
 			}
 		}
-
+		if((puntosEq1+puntosEq2) == 6) {
+			if (puntosEq1 > puntosEq2) {
+				JOptionPane.showMessageDialog(null, "Gana el equipo 1");
+			} else if (puntosEq2 > puntosEq1) {
+				JOptionPane.showMessageDialog(null, "Gana el equipo 2");
+			} else {
+				JOptionPane.showMessageDialog(null, "Empate");
+			}
+		}
 	}
 
 	public void combatePorEquipoInterno() {
