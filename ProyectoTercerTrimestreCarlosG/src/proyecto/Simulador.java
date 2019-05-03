@@ -57,7 +57,7 @@ public class Simulador {
 
 		sim.validate();
 		JButton btnBack = new JButton();
-		btnBack.setIcon(new ImageIcon("src\\proyecto\\pic\\back.png"));
+		btnBack.setIcon(new ImageIcon("src\\pic\\back.png"));
 		btnBack.setBounds(10, 10, 40, 20);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class Simulador {
 		});
 		sim.add(btnBack);
 
-		JLabel pvpLogo = new JLabel(new ImageIcon("src\\proyecto\\pic\\logoSilkRoad.png"));
+		JLabel pvpLogo = new JLabel(new ImageIcon("src\\pic\\logoSilkRoad.png"));
 		pvpLogo.setBounds(410, 0, 140, 120);
 		sim.add(pvpLogo);
 
@@ -87,7 +87,7 @@ public class Simulador {
 		btnBuscarNombre1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscarYAsignarStats1(textNombreSim1.getText(), nombrePkm1);
-				barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
+				barraVida1.setIcon(new ImageIcon("src\\pic\\BarraLlena.png"));
 				vida1.setText(sta1 + "/" + sta1);
 				efectivo1.setText("");
 			}
@@ -130,7 +130,7 @@ public class Simulador {
 		btnBuscarNombre2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscarYAsignarStats2(textNombreSim2.getText(), nombrePkm2);
-				barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
+				barraVida2.setIcon(new ImageIcon("src\\pic\\BarraLlena.png"));
 				vida2.setText(sta2 + "/" + sta2);
 				efectivo2.setText("");
 
@@ -160,13 +160,13 @@ public class Simulador {
 		gengar.setBounds(440, 130, 80, 80);
 		sim.add(gengar);
 
-		btnCombatir = new JButton(new ImageIcon("src\\proyecto\\pic\\fight.png"));
+		btnCombatir = new JButton(new ImageIcon("src\\pic\\fight.png"));
 		btnCombatir.setBounds(400, 345, 160, 45);
 		btnCombatir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (existePkm1 && existePkm2) {
 					combate();
-					gengar.setIcon(new ImageIcon("src\\proyecto\\pic\\gengar.gif"));
+					gengar.setIcon(new ImageIcon("src\\pic\\gengar.gif"));
 				} else {
 					JOptionPane.showMessageDialog(null, "Elige 2 Pokémon para comenzar");
 				}
@@ -179,12 +179,12 @@ public class Simulador {
 		btnPlacebo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				combate();
-				gengar.setIcon(new ImageIcon("src\\proyecto\\pic\\gengar.gif"));
+				gengar.setIcon(new ImageIcon("src\\pic\\gengar.gif"));
 			}
 		});
 		sim.add(btnCombatir);
 
-		btnCombatirEquipos = new JButton(new ImageIcon("src\\proyecto\\pic\\teamfight.png"));
+		btnCombatirEquipos = new JButton(new ImageIcon("src\\pic\\teamfight.png"));
 		btnCombatirEquipos.setBounds(420, 230, 120, 30);
 		btnCombatirEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,7 +212,7 @@ public class Simulador {
 		});
 		sim.add(btnReiniciar);
 
-		btnRandom = new JButton(new ImageIcon("src\\proyecto\\pic\\random.png"));
+		btnRandom = new JButton(new ImageIcon("src\\pic\\random.png"));
 		btnRandom.setBounds(440, 395, 80, 40);
 		btnRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -266,7 +266,7 @@ public class Simulador {
 		logoTipo1.setForeground(Color.black);
 		sim.add(logoTipo1);
 
-		barraVida1 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
+		barraVida1 = new JLabel(new ImageIcon("src\\pic\\BarraLlena.png")) {
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				// String s = "xddas";
@@ -283,7 +283,7 @@ public class Simulador {
 		logoTipo2.setForeground(Color.black);
 		sim.add(logoTipo2);
 
-		barraVida2 = new JLabel(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png")) {
+		barraVida2 = new JLabel(new ImageIcon("src\\pic\\BarraLlena.png")) {
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				// String s = "xddas";
@@ -397,39 +397,39 @@ public class Simulador {
 				vida2.setText(staRest2 + "/" + sta2);
 
 				if (staRest1 < ((sta1 / 8) * 7) && staRest1 > (sta1 / 8) * 6) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra78.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra78.png"));
 				} else if (staRest1 < ((sta1 / 8) * 6) && staRest1 > (sta1 / 8) * 5) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra68.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra68.png"));
 				} else if (staRest1 < ((sta1 / 8) * 5) && staRest1 > (sta1 / 8) * 4) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra58.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra58.png"));
 				} else if (staRest1 < ((sta1 / 8) * 4) && staRest1 > (sta1 / 8) * 3) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra48.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra48.png"));
 				} else if (staRest1 < ((sta1 / 8) * 3) && staRest1 > (sta1 / 8) * 2) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra38.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra38.png"));
 				} else if (staRest1 < ((sta1 / 8) * 2) && staRest1 > (sta1 / 8) * 1) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra28.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra28.png"));
 				} else if (staRest1 < ((sta1 / 8) * 1) && staRest1 > 0) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra18.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra18.png"));
 				} else if (staRest1 == 0) {
-					barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra08.png"));
+					barraVida1.setIcon(new ImageIcon("src\\pic\\Barra08.png"));
 				}
 
 				if (staRest2 < ((sta2 / 8) * 7) && staRest2 > (sta2 / 8) * 6) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra78.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra78.png"));
 				} else if (staRest2 < ((sta2 / 8) * 6) && staRest2 > (sta2 / 8) * 5) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra68.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra68.png"));
 				} else if (staRest2 < ((sta2 / 8) * 5) && staRest2 > (sta2 / 8) * 4) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra58.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra58.png"));
 				} else if (staRest2 < ((sta2 / 8) * 4) && staRest2 > (sta2 / 8) * 3) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra48.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra48.png"));
 				} else if (staRest2 < ((sta2 / 8) * 3) && staRest2 > (sta2 / 8) * 2) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra38.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra38.png"));
 				} else if (staRest2 < ((sta2 / 8) * 2) && staRest2 > (sta2 / 8) * 1) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra28.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra28.png"));
 				} else if (staRest2 < ((sta2 / 8) * 1) && staRest2 > 0) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra18.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra18.png"));
 				} else if (staRest2 == 0) {
-					barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\Barra08.png"));
+					barraVida2.setIcon(new ImageIcon("src\\pic\\Barra08.png"));
 				}
 
 				if (staRest1 == 0 || staRest2 == 0) {
@@ -486,8 +486,8 @@ public class Simulador {
 			} else if (nombrePkm2.getText().equals(ganador)) {
 				puntosEq2++;
 			}
-			barraVida1.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
-			barraVida2.setIcon(new ImageIcon("src\\proyecto\\pic\\BarraLlena.png"));
+			barraVida1.setIcon(new ImageIcon("src\\pic\\BarraLlena.png"));
+			barraVida2.setIcon(new ImageIcon("src\\pic\\BarraLlena.png"));
 
 			reader1 = crearReader(numTxt1);
 			reader2 = crearReader(numTxt2);
@@ -618,39 +618,39 @@ public class Simulador {
 	
 	public void cambiarLogoTipo(DefaultTableModel modelo, JLabel logo) {
 		if(modelo.getValueAt(0, 3).equals("Bicho")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\bicho.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\bicho.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Acero")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\acero.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\acero.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Fuego")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\fuego.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\fuego.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Agua")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\agua.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\agua.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Planta")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\planta.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\planta.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Tierra")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\tierra.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\tierra.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Roca")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\roca.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\roca.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Electrico")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\electrico.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\electrico.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Volador")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\volador.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\volador.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Psiquico")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\psiquico.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\psiquico.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Veneno")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\veneno.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\veneno.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Lucha")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\lucha.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\lucha.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Normal")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\normal.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\normal.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Fantasma")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\fantasma.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\fantasma.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Dragon")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\dragon.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\dragon.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Hielo")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\hielo.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\hielo.png"));
 		}else if(modelo.getValueAt(0, 3).equals("Siniestro")) {
-			logo.setIcon(new ImageIcon("src\\proyecto\\pic\\siniestro.png"));
+			logo.setIcon(new ImageIcon("src\\pic\\siniestro.png"));
 		}
 	}
 

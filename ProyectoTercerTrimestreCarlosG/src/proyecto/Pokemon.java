@@ -64,7 +64,7 @@ public class Pokemon extends JPanel {
 		pkm.setLayout(null);
 
 		JButton btnBack = new JButton();
-		btnBack.setIcon(new ImageIcon("src\\proyecto\\pic\\back.png"));
+		btnBack.setIcon(new ImageIcon("src\\pic\\back.png"));
 		btnBack.setBounds(10, 10, 40, 20);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,7 +84,7 @@ public class Pokemon extends JPanel {
 		lblAnadir.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblAnadir);
 
-		JButton botonAnadir = new JButton(new ImageIcon("src\\proyecto\\pic\\añadir.jpg"));
+		JButton botonAnadir = new JButton(new ImageIcon("src\\pic\\añadir.jpg"));
 		botonAnadir.setBounds(140, 57, 100, 40);
 		botonAnadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +98,7 @@ public class Pokemon extends JPanel {
 		lblEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblEliminar);
 
-		JButton botonEliminar = new JButton(new ImageIcon("src\\proyecto\\pic\\eliminar.png"));
+		JButton botonEliminar = new JButton(new ImageIcon("src\\pic\\eliminar.png"));
 		botonEliminar.setBounds(470, 57, 100, 40);
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,7 +125,7 @@ public class Pokemon extends JPanel {
 		lblUpdate.setFont(new Font("Tahoma", Font.BOLD, 16));
 		pkm.add(lblUpdate);
 
-		btnUpdate = new JButton(new ImageIcon("src\\proyecto\\pic\\update.png"));
+		btnUpdate = new JButton(new ImageIcon("src\\pic\\update.png"));
 		btnUpdate.setBounds(784, 57, 100, 40);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -42,7 +42,7 @@ public class TheSilkRoad extends JFrame {
 		setSize(anchoPantalla / 2, alturaPantalla / 2);
 		setLocation(anchoPantalla / 4, alturaPantalla / 4);
 		setTitle("The Silk Road");
-		Image icono = miPantalla.getImage("src\\proyecto\\pic\\masterball.png");
+		Image icono = miPantalla.getImage("src\\pic\\masterball.png");
 		setIconImage(icono);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +53,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background.jpg"));
+					img = ImageIO.read(new File("src\\pic\\Background.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -71,7 +71,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
+					img = ImageIO.read(new File("src\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -89,7 +89,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
+					img = ImageIO.read(new File("src\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -107,7 +107,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
+					img = ImageIO.read(new File("src\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -125,7 +125,7 @@ public class TheSilkRoad extends JFrame {
 				super.paintComponent(g);
 				BufferedImage img = null;
 				try {
-					img = ImageIO.read(new File("src\\proyecto\\pic\\Background2.jpg"));
+					img = ImageIO.read(new File("src\\pic\\Background2.jpg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -139,7 +139,7 @@ public class TheSilkRoad extends JFrame {
 		equipo.setLayout(null);
 
 		JButton botonPkm = new JButton();
-		botonPkm.setIcon(new ImageIcon("src\\proyecto\\pic\\pkmlogo.png"));
+		botonPkm.setIcon(new ImageIcon("src\\pic\\pkmlogo.png"));
 		botonPkm.setBounds(100, 100, 200, 100);
 		botonPkm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,7 +153,7 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonPkm);
 
 		JButton botonMov = new JButton();
-		botonMov.setIcon(new ImageIcon("src\\proyecto\\pic\\movimientos.png"));
+		botonMov.setIcon(new ImageIcon("src\\pic\\movimientos.png"));
 		botonMov.setBounds(100, 220, 200, 100);
 		botonMov.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -166,7 +166,7 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonMov);
 
 		JButton botonSim = new JButton();
-		botonSim.setIcon(new ImageIcon("src\\proyecto\\pic\\simulador.png"));
+		botonSim.setIcon(new ImageIcon("src\\pic\\simulador.png"));
 		botonSim.setBounds(100, 340, 200, 100);
 		botonSim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -179,7 +179,7 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonSim);
 
 		JButton botonEquipo = new JButton();
-		botonEquipo.setIcon(new ImageIcon("src\\proyecto\\pic\\Equipo.png"));
+		botonEquipo.setIcon(new ImageIcon("src\\pic\\Equipo.png"));
 		botonEquipo.setBounds(715, 400, 120, 60);
 		botonEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,23 +191,23 @@ public class TheSilkRoad extends JFrame {
 		});
 		menuP.add(botonEquipo);
 
-		JLabel lblMenuPrincipal = new JLabel(new ImageIcon("src\\proyecto\\pic\\MenúPrincipal.png"));
+		JLabel lblMenuPrincipal = new JLabel(new ImageIcon("src\\pic\\MenúPrincipal.png"));
 		
 		lblMenuPrincipal.setBounds(330, 8, 300, 100);
 		
 		menuP.add(lblMenuPrincipal);
 
-		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\PokemonLogo.gif"));
+		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\pic\\PokemonLogo.gif"));
 		pokemonlabel.setBounds(350, 100, 200, 100);
 		menuP.add(pokemonlabel);
-		JLabel movimientoslabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\AtaqueLogo.gif"));
+		JLabel movimientoslabel = new JLabel(new ImageIcon("src\\pic\\AtaqueLogo.gif"));
 		movimientoslabel.setBounds(350, 220, 200, 100);
 		menuP.add(movimientoslabel);
-		JLabel simuladorlabel = new JLabel(new ImageIcon("src\\proyecto\\pic\\CombateLogo.gif"));
+		JLabel simuladorlabel = new JLabel(new ImageIcon("src\\pic\\CombateLogo.gif"));
 		simuladorlabel.setBounds(350, 340, 200, 100);
 		menuP.add(simuladorlabel);
 
-		JLabel torchic = new JLabel(new ImageIcon("src\\proyecto\\pic\\EquipoLogo.png"));
+		JLabel torchic = new JLabel(new ImageIcon("src\\pic\\EquipoLogo.png"));
 		torchic.setBounds(625, 160, 300, 200);
 		menuP.add(torchic);
 
