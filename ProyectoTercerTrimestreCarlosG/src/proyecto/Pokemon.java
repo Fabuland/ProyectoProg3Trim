@@ -57,12 +57,12 @@ public class Pokemon extends JPanel {
 		tablaPoke.getTableHeader().setFont(fuente);
 		tablaPoke.setBounds(60, 110, 824, 360);
 		pkm.add(tablaPoke);
-		JScrollPane jp = new JScrollPane(tablaPoke);
-		jp.setBounds(60, 110, 824, 360);
-		jp.setVisible(true);
-		jp.setViewportView(tablaPoke);
-		add(jp);
-		pkm.add(jp);
+		JScrollPane scroll = new JScrollPane(tablaPoke);
+		scroll.setBounds(60, 110, 824, 360);
+		scroll.setVisible(true);
+		scroll.setViewportView(tablaPoke);
+		add(scroll);
+		pkm.add(scroll);
 		pkm.setLayout(null);
 
 		JButton btnBack = new JButton();

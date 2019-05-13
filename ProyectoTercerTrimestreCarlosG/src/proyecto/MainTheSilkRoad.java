@@ -13,6 +13,7 @@ public class MainTheSilkRoad {
 					TheSilkRoad frame = new TheSilkRoad();
 					frame.setVisible(true);
 					Conexion.conectar();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
