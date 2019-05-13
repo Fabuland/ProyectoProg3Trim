@@ -7,6 +7,7 @@ import javax.swing.JTable;
 import bbdd.Conexion;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -110,7 +111,7 @@ public class Ataques extends JPanel {
 					eliminarBaseDatos(nombreAtElim);
 
 				} else {
-					System.out.println("error al eliminar");
+					JOptionPane.showMessageDialog(null, "Error al eliminar");
 
 				}
 
@@ -452,10 +453,13 @@ public class Ataques extends JPanel {
 				int cargaNrgC = Integer.parseInt(tablaAt.getValueAt(filasTotales, 2).toString());
 				int dpsN = dañoC / dur;
 				int epsN = cargaNrgC / dur;
-				String dpsText = Integer.toString(dpsN) + ".0";
-				String epsText = Integer.toString(epsN) + ".0";
+				String dpsText = Integer.toString(dpsN)+"";
+				String epsText = Integer.toString(epsN)+"";
+				/*String dpsTextN = Integer.toString(dpsN) + ".0";
+				String epsTextN = Integer.toString(epsN) + ".0";
+				tablaAt.setValueAt(dpsText, filasTotales, 3);
+				tablaAt.setValueAt(epsText, filasTotales, 4);*/
 				actualizarBaseDatosDpsEps(nombre, dpsText, epsText);
-
 			}
 			filasTotales--;
 		}
@@ -477,7 +481,7 @@ public class Ataques extends JPanel {
 
 	public void actualizarBaseDatosDpsEps(String nombre, String dps, String eps) {
 
-		Conexion.EjecutarUpdate("UPDATE ataques SET dps = "+dps+", eps = "+eps+" WHERE nombre = \"" + nombre + "\";");
+		Conexion.EjecutarUpdate("UPDATE ataques SET DPS = "+dps+", EPS = "+eps+" WHERE nombre = \"" + nombre + "\";");
 
 	}
 

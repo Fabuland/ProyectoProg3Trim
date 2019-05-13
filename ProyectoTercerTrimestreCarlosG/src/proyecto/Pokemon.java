@@ -8,10 +8,12 @@ import javax.swing.JTable;
 import bbdd.Conexion;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -111,7 +113,7 @@ public class Pokemon extends JPanel {
 					eliminarBaseDatos(nombrePkmElim);
 
 				} else {
-					System.out.println("error al eliminar");
+					JOptionPane.showMessageDialog(null, "Error al eliminar");
 
 				}
 
@@ -298,6 +300,15 @@ public class Pokemon extends JPanel {
 		contenidoActualizar.add(lblNombre);
 
 		JTextField textNombre = new JTextField();
+		textNombre.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textNombre.setEditable(true);
 		textNombre.setBounds(150, 58, 221, 20);
 		contenidoActualizar.add(textNombre);
@@ -308,10 +319,19 @@ public class Pokemon extends JPanel {
 		contenidoActualizar.add(lblTipo);
 
 		JTextField textTipo = new JTextField();
+		textTipo.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textTipo.setEditable(true);
 		textTipo.setBounds(150, 108, 221, 20);
 		contenidoActualizar.add(textTipo);
-		
+
 		JButton btnActBBDD = new JButton("ACTUALIZAR");
 		btnActBBDD.setBounds(200, 425, 120, 30);
 		btnActBBDD.addActionListener(new ActionListener() {
@@ -385,34 +405,97 @@ public class Pokemon extends JPanel {
 		contenidoAñadir.add(lblTipo);
 
 		JTextField textId = new JTextField();
+		textId.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textId.setEditable(true);
 		textId.setBounds(150, 58, 221, 20);
 		contenidoAñadir.add(textId);
 
 		JTextField textNombre = new JTextField();
+		textNombre.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textNombre.setEditable(true);
 		textNombre.setBounds(150, 107, 221, 20);
 		contenidoAñadir.add(textNombre);
 
 		JTextField textPc = new JTextField();
+		textPc.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textPc.setEditable(true);
 		textPc.setBounds(150, 157, 221, 20);
 		contenidoAñadir.add(textPc);
 
 		JTextField textAtaque = new JTextField();
+		textAtaque.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textAtaque.setBounds(150, 207, 221, 20);
 		contenidoAñadir.add(textAtaque);
 
 		JTextField textDefensa = new JTextField();
+		textDefensa.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textDefensa.setBounds(150, 257, 221, 20);
 		contenidoAñadir.add(textDefensa);
 
 		JTextField textStamina = new JTextField();
+		textStamina.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textStamina.setEditable(true);
 		textStamina.setBounds(150, 307, 221, 20);
 		contenidoAñadir.add(textStamina);
 
 		JTextField textTipo = new JTextField();
+		textTipo.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textTipo.setBounds(150, 357, 221, 20);
 		contenidoAñadir.add(textTipo);
 
@@ -435,6 +518,7 @@ public class Pokemon extends JPanel {
 		JButton btnAñadirBBDD = new JButton("AÑADIR");
 		btnAñadirBBDD.setBounds(215, 425, 90, 30);
 		btnAñadirBBDD.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				// añadirBaseDatos(nuevaFila[0], nuevaFila[1], nuevaFila[2], nuevaFila[3],
 				// nuevaFila[4], nuevaFila[5], nuevaFila[6]);
@@ -446,6 +530,7 @@ public class Pokemon extends JPanel {
 						textDefensa.getText(), textStamina.getText(), textTipo.getText());
 				btnAdd.doClick();
 			}
+
 		});
 		contenidoAñadir.add(btnAñadirBBDD);
 
@@ -469,11 +554,11 @@ public class Pokemon extends JPanel {
 				+ ataque + ", " + defensa + ", " + stamina + ", \"" + tipo + "\");");
 
 	}
-	
+
 	public void actualizarBaseDatos(String nombre, String tipo) {
-		
+
 		Conexion.EjecutarUpdate("UPDATE pokemon SET tipo = \"" + tipo + "\" WHERE nombre = \"" + nombre + "\";");
-		
+
 	}
 
 	public void eliminarBaseDatos(String nombre) {

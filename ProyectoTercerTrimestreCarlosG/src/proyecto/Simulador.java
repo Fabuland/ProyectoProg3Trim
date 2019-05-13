@@ -36,8 +36,7 @@ public class Simulador {
 	DefaultTableModel modeloSim1, modeloSim2;
 	int at1, def1, sta1, at2, def2, sta2, numTxt1, numTxt2, staEqRest1, staEqRest2, puntosEq1, puntosEq2;
 	String tipo1, tipo2, pkm1, pkm2, ganador;
-	JButton btnBuscarNombre1, btnBuscarNombre2, btnCombatir, btnCombatirEquipos, btnRandom,
-			btnPlacebo;
+	JButton btnBuscarNombre1, btnBuscarNombre2, btnCombatir, btnCombatirEquipos, btnRandom, btnPlacebo;
 	Boolean existePkm1, existePkm2;
 	JLabel vida1, vida2;
 	JLabel barraVida1, barraVida2;
@@ -190,15 +189,21 @@ public class Simulador {
 			public void actionPerformed(ActionEvent e) {
 				numTxt1 = sacarEquipo(textNombreEq1);
 				numTxt2 = sacarEquipo(textNombreEq2);
+
 				if ((numTxt1 > 0 && numTxt1 <= 4) && (numTxt2 > 0 && numTxt2 <= 4)) {
-					combatePorEquipos(numTxt1, numTxt2);
+					if (existenEquipos(numTxt1, numTxt2)) {
+						combatePorEquipos(numTxt1, numTxt2);
+					} else {
+						JOptionPane.showMessageDialog(null, "Algunos de tus Pokémon no existen");
+					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Elige 2 equipos existentes");
 				}
+
 			}
 		});
 		sim.add(btnCombatirEquipos);
-		
+
 		JButton btnReiniciar = new JButton("Restart");
 		btnReiniciar.setBounds(440, 270, 80, 20);
 		btnReiniciar.addActionListener(new ActionListener() {
@@ -260,7 +265,7 @@ public class Simulador {
 		efectivo2.setFont(new Font("NSimSun", Font.BOLD, 20));
 		efectivo2.setBounds(680, 290, 220, 30);
 		sim.add(efectivo2);
-		
+
 		logoTipo1 = new JLabel();
 		logoTipo1.setBounds(290, 6, 150, 40);
 		logoTipo1.setForeground(Color.black);
@@ -277,7 +282,7 @@ public class Simulador {
 		sim.add(barraVida1);
 		barraVida1.add(nombrePkm1);
 		barraVida1.add(logoTipo1);
-		
+
 		logoTipo2 = new JLabel();
 		logoTipo2.setBounds(290, 6, 150, 40);
 		logoTipo2.setForeground(Color.black);
@@ -385,6 +390,7 @@ public class Simulador {
 					btnCombatir.setEnabled(false);
 					btnPlacebo.setEnabled(false);
 					btnCombatirEquipos.setEnabled(false);
+					btnRandom.setEnabled(false);
 				}
 				staRest1 -= dañoF2;
 				staRest2 -= dañoF1;
@@ -457,6 +463,7 @@ public class Simulador {
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm2.getText() + "!");
 					btnCombatir.setEnabled(true);
 					btnPlacebo.setEnabled(true);
+					btnRandom.setEnabled(true);
 					btnCombatirEquipos.setEnabled(true);
 					ganador = nombrePkm2.getText();
 				} else if (staRest2 == 0) {
@@ -464,6 +471,7 @@ public class Simulador {
 					JOptionPane.showMessageDialog(null, "El ganador es " + nombrePkm1.getText() + "!");
 					btnCombatir.setEnabled(true);
 					btnPlacebo.setEnabled(true);
+					btnRandom.setEnabled(true);
 					btnCombatirEquipos.setEnabled(true);
 					ganador = nombrePkm1.getText();
 				} else if (staRest1 == 0 && staRest2 == 0) {
@@ -501,25 +509,78 @@ public class Simulador {
 			buscarYAsignarStats2(pokActual2, nombrePkm2);
 			btnPlacebo.doClick();
 			contLineas++;
-			System.out.println(puntosEq1+"  //  "+puntosEq2);
-		} else if ((puntosEq1+puntosEq2) < 6) {
+			System.out.println(puntosEq1 + "  //  " + puntosEq2);
+		} else if ((puntosEq1 + puntosEq2) < 6) {
 			if (nombrePkm1.getText().equals(ganador)) {
 				puntosEq1++;
 			} else if (nombrePkm2.getText().equals(ganador)) {
 				puntosEq2++;
 			}
-			System.out.println(puntosEq1+"  //  "+puntosEq2);
+			System.out.println(puntosEq1 + "  //  " + puntosEq2);
 		}
-		if((puntosEq1+puntosEq2) == 6) {
+		if ((puntosEq1 + puntosEq2) == 6) {
 			if (puntosEq1 > puntosEq2) {
-				JOptionPane.showMessageDialog(null, "Gana el equipo "+textNombreEq1.getText());
+				JOptionPane.showMessageDialog(null, "Gana el equipo " + textNombreEq1.getText());
 			} else if (puntosEq2 > puntosEq1) {
-				JOptionPane.showMessageDialog(null, "Gana el equipo "+textNombreEq2.getText());
+				JOptionPane.showMessageDialog(null, "Gana el equipo " + textNombreEq2.getText());
 			} else {
 				JOptionPane.showMessageDialog(null, "Empate");
 			}
-			System.out.println(puntosEq1+"  //  "+puntosEq2);
+			System.out.println(puntosEq1 + "  //  " + puntosEq2);
 		}
+	}
+
+	public boolean existenEquipos(int eq1, int eq2) {
+
+		boolean existe1 = true;
+		boolean existe2 = true;
+		int contBoolean = 0;
+		String nombreActual1 = "";
+		String nombreActual2 = "";
+
+		reader1 = crearReader(numTxt1);
+		reader2 = crearReader(numTxt2);
+		reader1.nextLine();
+		reader2.nextLine();
+		for (int i = 0; i < 6; i++) {
+			nombreActual1 = reader1.nextLine();
+			nombreActual2 = reader2.nextLine();
+			existe1 = buscarPokeBBDD(nombreActual1);
+			existe2 = buscarPokeBBDD(nombreActual2);
+			if(existe1 == false || existe2 == false) {
+				contBoolean++;
+			}
+			System.out.println(nombreActual1);
+			System.out.println(nombreActual2);
+			System.out.println(contBoolean);
+		}
+		if(contBoolean == 0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+
+	}
+	
+	public boolean buscarPokeBBDD(String nombre) {
+		boolean existe = false;
+		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
+		try {
+			while (buscarNombre.next()) {
+				if (nombre.equals(buscarNombre.getString("nombre"))) {
+					at2 = buscarNombre.getInt("ataque");
+					def2 = buscarNombre.getInt("defensa");
+					sta2 = buscarNombre.getInt("stamina");
+					tipo2 = buscarNombre.getString("tipo");
+					existe = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return existe;
 	}
 
 	public int sacarEquipo(JTextField nombreField) {
@@ -615,41 +676,41 @@ public class Simulador {
 		reader.close();
 		writer.close();
 	}
-	
+
 	public void cambiarLogoTipo(DefaultTableModel modelo, JLabel logo) {
-		if(modelo.getValueAt(0, 3).equals("Bicho")) {
+		if (modelo.getValueAt(0, 3).equals("Bicho")) {
 			logo.setIcon(new ImageIcon("src\\pic\\bicho.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Acero")) {
+		} else if (modelo.getValueAt(0, 3).equals("Acero")) {
 			logo.setIcon(new ImageIcon("src\\pic\\acero.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Fuego")) {
+		} else if (modelo.getValueAt(0, 3).equals("Fuego")) {
 			logo.setIcon(new ImageIcon("src\\pic\\fuego.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Agua")) {
+		} else if (modelo.getValueAt(0, 3).equals("Agua")) {
 			logo.setIcon(new ImageIcon("src\\pic\\agua.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Planta")) {
+		} else if (modelo.getValueAt(0, 3).equals("Planta")) {
 			logo.setIcon(new ImageIcon("src\\pic\\planta.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Tierra")) {
+		} else if (modelo.getValueAt(0, 3).equals("Tierra")) {
 			logo.setIcon(new ImageIcon("src\\pic\\tierra.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Roca")) {
+		} else if (modelo.getValueAt(0, 3).equals("Roca")) {
 			logo.setIcon(new ImageIcon("src\\pic\\roca.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Electrico")) {
+		} else if (modelo.getValueAt(0, 3).equals("Electrico")) {
 			logo.setIcon(new ImageIcon("src\\pic\\electrico.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Volador")) {
+		} else if (modelo.getValueAt(0, 3).equals("Volador")) {
 			logo.setIcon(new ImageIcon("src\\pic\\volador.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Psiquico")) {
+		} else if (modelo.getValueAt(0, 3).equals("Psiquico")) {
 			logo.setIcon(new ImageIcon("src\\pic\\psiquico.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Veneno")) {
+		} else if (modelo.getValueAt(0, 3).equals("Veneno")) {
 			logo.setIcon(new ImageIcon("src\\pic\\veneno.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Lucha")) {
+		} else if (modelo.getValueAt(0, 3).equals("Lucha")) {
 			logo.setIcon(new ImageIcon("src\\pic\\lucha.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Normal")) {
+		} else if (modelo.getValueAt(0, 3).equals("Normal")) {
 			logo.setIcon(new ImageIcon("src\\pic\\normal.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Fantasma")) {
+		} else if (modelo.getValueAt(0, 3).equals("Fantasma")) {
 			logo.setIcon(new ImageIcon("src\\pic\\fantasma.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Dragon")) {
+		} else if (modelo.getValueAt(0, 3).equals("Dragon")) {
 			logo.setIcon(new ImageIcon("src\\pic\\dragon.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Hielo")) {
+		} else if (modelo.getValueAt(0, 3).equals("Hielo")) {
 			logo.setIcon(new ImageIcon("src\\pic\\hielo.png"));
-		}else if(modelo.getValueAt(0, 3).equals("Siniestro")) {
+		} else if (modelo.getValueAt(0, 3).equals("Siniestro")) {
 			logo.setIcon(new ImageIcon("src\\pic\\siniestro.png"));
 		}
 	}

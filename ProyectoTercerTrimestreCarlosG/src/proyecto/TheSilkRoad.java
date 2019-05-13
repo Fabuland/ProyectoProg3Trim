@@ -22,8 +22,6 @@ import java.awt.Graphics;
 
 public class TheSilkRoad extends JFrame {
 
-	private JPanel contentPane;
-
 	/**
 	 * Launch the application.
 	 */
@@ -66,7 +64,7 @@ public class TheSilkRoad extends JFrame {
 		menuP.setVisible(true);
 		menuP.setLayout(null);
 
-		pkm = new JPanel(){
+		pkm = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				BufferedImage img = null;
@@ -84,7 +82,7 @@ public class TheSilkRoad extends JFrame {
 		pkm.setVisible(false);
 		pkm.setLayout(null);
 
-		movim = new JPanel(){
+		movim = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				BufferedImage img = null;
@@ -102,7 +100,7 @@ public class TheSilkRoad extends JFrame {
 		movim.setVisible(false);
 		movim.setLayout(null);
 
-		simul = new JPanel(){
+		simul = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				BufferedImage img = null;
@@ -120,7 +118,7 @@ public class TheSilkRoad extends JFrame {
 		simul.setVisible(false);
 		simul.setLayout(null);
 
-		equipo = new JPanel(){
+		equipo = new JPanel() {
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				BufferedImage img = null;
@@ -192,9 +190,9 @@ public class TheSilkRoad extends JFrame {
 		menuP.add(botonEquipo);
 
 		JLabel lblMenuPrincipal = new JLabel(new ImageIcon("src\\pic\\MenúPrincipal.png"));
-		
+
 		lblMenuPrincipal.setBounds(330, 8, 300, 100);
-		
+
 		menuP.add(lblMenuPrincipal);
 
 		JLabel pokemonlabel = new JLabel(new ImageIcon("src\\pic\\PokemonLogo.gif"));
