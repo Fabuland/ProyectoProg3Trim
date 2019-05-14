@@ -211,15 +211,14 @@ public class Simulador {
 		});
 		sim.add(btnCombatirEquipos);
 
-		JButton btnReiniciar = new JButton("Restart");
-		btnReiniciar.setBounds(440, 270, 80, 20);
+		JButton btnReiniciar = new JButton(new ImageIcon("src\\pic\\update.png"));
+		btnReiniciar.setBounds(455, 270, 50, 45);
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contLineas = 1;
 				puntosEq1 = 0;
 				puntosEq2 = 0;
 				ganador = "";
-				System.out.println(ganador);
 			}
 		});
 		sim.add(btnReiniciar);

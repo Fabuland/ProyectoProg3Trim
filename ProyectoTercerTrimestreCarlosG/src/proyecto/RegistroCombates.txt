@@ -319,3 +319,4 @@ Psyduck vs Blastoise. Ganador: Blastoise
 Tauros vs Psyduck. Ganador: Tauros
 Jynx vs Omastar. Ganador: Omastar
 Bulbasaur vs Geodude. Ganador: Geodude
+Gastly vs Machamp. Ganador: Machamp
