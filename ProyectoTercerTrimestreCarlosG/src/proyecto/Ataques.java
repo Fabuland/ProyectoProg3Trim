@@ -558,7 +558,7 @@ public class Ataques extends JPanel {
 	 * Anade un nuevo ataque a la base de datos con las estadisticas introducidas
 	 * 
 	 * @param Nombre nombre nuevo
-	 * @param Daño daño nuevo
+	 * @param Daño dano nuevo
 	 * @param CargaNrg carga energia nueva
 	 * @param DPS dps nuevo
 	 * @param EPS eps nuevo

@@ -29,7 +29,7 @@ public class TheSilkRoad extends JFrame {
 	JPanel equipo;
 
 	/**
-	 * Frame principal que contiene todos los botones que llevan al resto de paneles, imágenes de referencia y un título
+	 * Frame principal que contiene todos los botones que llevan al resto de paneles, imagenes de referencia y un titulo
 	 */
 	public TheSilkRoad() {
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();

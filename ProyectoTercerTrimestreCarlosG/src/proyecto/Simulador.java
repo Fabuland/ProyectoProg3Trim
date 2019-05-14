@@ -675,7 +675,7 @@ public class Simulador {
 	}
 
 	/**
-	 * Calcula el daño que hace el Pokemon
+	 * Calcula el dano que hace el Pokemon
 	 * 
 	 * @param at ataque
 	 * @param def defensa
@@ -724,7 +724,7 @@ public class Simulador {
 	}
 
 	/**
-	 * Añade los combates hechos al registro de combates
+	 * Anade los combates hechos al registro de combates
 	 * 
 	 * @param pkm1 Primero Pokemon
 	 * @param pkm2 Segundo Pokemon
@@ -789,7 +789,7 @@ public class Simulador {
 	}
 
 	/**
-	 * Cambia el daño de un Pokemon dependiendo del tipo que sea el atacante y el tipo que sea el defensor, y viceversa.
+	 * Cambia el dano de un Pokemon dependiendo del tipo que sea el atacante y el tipo que sea el defensor, y viceversa.
 	 * Muestra en un Label si es muy efectivo, poco efectivo o nada efectivo.
 	 * 
 	 * @param tipoAt tipo del atacante

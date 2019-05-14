@@ -298,7 +298,7 @@ public class Equipo extends JPanel {
 	}
 	
 	/**
-	 * Rellena los datos de los nombres en sus respectivos JLabel y las JTable sacándolos de los 4 ficheros de texto
+	 * Rellena los datos de los nombres en sus respectivos JLabel y las JTable sacandolos de los 4 ficheros de texto
 	 */
 	public void rellenarDatos() {
 		sacarEquipo("1", nombreEq1, modeloEq1);
