@@ -198,7 +198,7 @@ public class Simulador {
 				numTxt2 = sacarEquipo(textNombreEq2);
 
 				if ((numTxt1 > 0 && numTxt1 <= 4) && (numTxt2 > 0 && numTxt2 <= 4)) {
-					if (existenEquipos(numTxt1, numTxt2)) {
+					if (existenEquipos()) {
 						combatePorEquipos();
 					} else {
 						JOptionPane.showMessageDialog(null, "Algunos de tus Pokémon no existen");
@@ -512,9 +512,9 @@ public class Simulador {
 	}
 
 	/**
+	 * Ejecuta el combate por equipos sacando los datos del fichero correspondiente y decidiendo un ganador dependiendo
+	 * del mayor numero de victorias
 	 * 
-	 * @param n1
-	 * @param n2
 	 */
 	public void combatePorEquipos() {
 		if (contLineas < 7) {
@@ -559,7 +559,12 @@ public class Simulador {
 		}
 	}
 
-	public boolean existenEquipos(int eq1, int eq2) {
+	/**
+	 * Comprueba que los Pokemon de los dos equipos existen
+	 * 
+	 * @return devuelve verdadero si existen
+	 */
+	public boolean existenEquipos() {
 
 		boolean existe1 = true;
 		boolean existe2 = true;
@@ -589,6 +594,12 @@ public class Simulador {
 
 	}
 	
+	/**
+	 * Busca en la base de datos si existe un Pokemon
+	 * 
+	 * @param nombre nombre del Pokemon a buscar
+	 * @return devuelve verdadero si existe
+	 */
 	public boolean buscarPokeBBDD(String nombre) {
 		boolean existe = false;
 		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
@@ -609,6 +620,12 @@ public class Simulador {
 		return existe;
 	}
 
+	/**
+	 * Saca los Pokemon del equipo dependiendo del nombre del mismo
+	 * 
+	 * @param nombreField nombre del equipo
+	 * @return devuelve el numero del fichero
+	 */
 	public int sacarEquipo(JTextField nombreField) {
 
 		Scanner reader1 = crearReader(1);
@@ -638,6 +655,12 @@ public class Simulador {
 
 	}
 
+	/**
+	 * Crea un reader a partir del numero del fichero que se introduzca
+	 * 
+	 * @param n numero del fichero
+	 * @return devuelve un reader
+	 */
 	public Scanner crearReader(int n) {
 
 		String ruta = "src/proyecto/EquipoGuardado" + n + ".txt";
@@ -651,6 +674,13 @@ public class Simulador {
 		return reader;
 	}
 
+	/**
+	 * Calcula el daño que hace el Pokemon
+	 * 
+	 * @param at ataque
+	 * @param def defensa
+	 * @return devuelve el valor del daño
+	 */
 	public int daño(int at, int def) {
 		int daño = (at / 15) - (def / 50);
 		if (daño < 1) {
@@ -659,6 +689,9 @@ public class Simulador {
 		return daño;
 	}
 
+	/**
+	 * Escoge dos Pokemon aleatoriamente en la base de datos y los posiciona preparados para combatir
+	 */
 	public void randomCombat() {
 
 		ResultSet cons1 = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY RAND() LIMIT 1");
@@ -690,6 +723,14 @@ public class Simulador {
 
 	}
 
+	/**
+	 * Añade los combates hechos al registro de combates
+	 * 
+	 * @param pkm1 Primero Pokemon
+	 * @param pkm2 Segundo Pokemon
+	 * @param ganador Ganador del combate
+	 * @throws IOException Excepcion para escribir
+	 */
 	public void registrarBatallas(String pkm1, String pkm2, String ganador) throws IOException {
 
 		String ruta = "src/proyecto/RegistroCombates.txt";
@@ -703,6 +744,12 @@ public class Simulador {
 		writer.close();
 	}
 
+	/**
+	 * Cambia el logo del tipo en la barra de vida, sacandolo de la tabla de estadisticas
+	 * 
+	 * @param modelo modelo de la tabla
+	 * @param logo JLabel que contiene la imagen del tipo
+	 */
 	public void cambiarLogoTipo(DefaultTableModel modelo, JLabel logo) {
 		if (modelo.getValueAt(0, 3).equals("Bicho")) {
 			logo.setIcon(new ImageIcon("src\\pic\\bicho.png"));
@@ -741,6 +788,16 @@ public class Simulador {
 		}
 	}
 
+	/**
+	 * Cambia el daño de un Pokemon dependiendo del tipo que sea el atacante y el tipo que sea el defensor, y viceversa.
+	 * Muestra en un Label si es muy efectivo, poco efectivo o nada efectivo.
+	 * 
+	 * @param tipoAt tipo del atacante
+	 * @param tipoDef tipo del defensor
+	 * @param dañoAt daño del atacante
+	 * @param efectivo muestra la efectividad
+	 * @return devuelve el nuevo valor de daño
+	 */
 	public int dañoPorTipo(String tipoAt, String tipoDef, int dañoAt, JLabel efectivo) {
 
 		if (tipoAt.equals("Normal") && (tipoDef.equals("Roca") || tipoDef.equals("Acero"))) {
