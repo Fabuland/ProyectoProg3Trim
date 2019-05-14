@@ -22,16 +22,15 @@ import java.awt.Graphics;
 
 public class TheSilkRoad extends JFrame {
 
-	/**
-	 * Launch the application.
-	 */
-
 	JPanel menuP;
 	JPanel pkm;
 	JPanel movim;
 	JPanel simul;
 	JPanel equipo;
 
+	/**
+	 * Frame principal que contiene todos los botones que llevan al resto de paneles, imágenes de referencia y un título
+	 */
 	public TheSilkRoad() {
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension tamanoPantalla = miPantalla.getScreenSize();
@@ -135,7 +134,7 @@ public class TheSilkRoad extends JFrame {
 		getContentPane().add(equipo);
 		equipo.setVisible(false);
 		equipo.setLayout(null);
-
+		 
 		JButton botonPkm = new JButton();
 		botonPkm.setIcon(new ImageIcon("src\\pic\\pkmlogo.png"));
 		botonPkm.setBounds(100, 100, 200, 100);

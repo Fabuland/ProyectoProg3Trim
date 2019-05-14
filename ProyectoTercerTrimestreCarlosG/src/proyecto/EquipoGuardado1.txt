@@ -4,4 +4,4 @@ Arcanine
 Psyduck
 Tauros
 Jynx
-Oddish
+Bulbasaur

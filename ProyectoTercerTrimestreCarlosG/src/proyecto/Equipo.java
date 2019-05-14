@@ -30,6 +30,13 @@ public class Equipo extends JPanel {
 
 	}
 
+	/**
+	 * Esta funcion crea todos los componentes que se le anaden al panel eq, el cual es el que
+	 * se visualiza ahora
+	 * 
+	 * @param eq panel que se visualiza en este momento
+	 * @param menuP panel menu principal que se deja de visualizar
+	 */
 	public void añadirEquipo(JPanel eq, JPanel menuP) {
 
 		eq.validate();
@@ -102,8 +109,6 @@ public class Equipo extends JPanel {
 		guardarEq1.setBounds(270, 70, 140, 23);
 		guardarEq1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// nombreEq1.setText(textNombreEq1.getText());
-				// borrarContenidoTxt("1");
 				guardarEquipo("1", nombreEq1, modeloEq1);
 			}
 		});
@@ -133,8 +138,6 @@ public class Equipo extends JPanel {
 		guardarEq2.setBounds(750, 70, 140, 23);
 		guardarEq2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// nombreEq1.setText(textNombreEq1.getText());
-				// borrarContenidoTxt("1");
 				guardarEquipo("2", nombreEq2, modeloEq2);
 			}
 		});
@@ -164,8 +167,6 @@ public class Equipo extends JPanel {
 		guardarEq3.setBounds(270, 340, 140, 23);
 		guardarEq3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// nombreEq1.setText(textNombreEq1.getText());
-				// borrarContenidoTxt("1");
 				guardarEquipo("3", nombreEq3, modeloEq3);
 			}
 		});
@@ -195,8 +196,6 @@ public class Equipo extends JPanel {
 		guardarEq4.setBounds(750, 340, 140, 23);
 		guardarEq4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// nombreEq1.setText(textNombreEq1.getText());
-				// borrarContenidoTxt("1");
 				guardarEquipo("4", nombreEq4, modeloEq4);
 			}
 		});
@@ -206,6 +205,14 @@ public class Equipo extends JPanel {
 
 	}
 
+	/**
+	 * Cambia el nombre del equipo y los componentes del mismo dependiendo de los valores que haya
+	 * en el archivo de texto donde se hayan guardado
+	 * 
+	 * @param n numero del equipo referido al archivo de texto
+	 * @param nombre nombre del equipo
+	 * @param modelo tabla donde se visualiza el equipo
+	 */
 	public void sacarEquipo(String n, JLabel nombre, DefaultTableModel modelo) {
 
 		String ruta = "src/proyecto/EquipoGuardado" + n + ".txt";
@@ -251,6 +258,13 @@ public class Equipo extends JPanel {
 
 	}
 
+	/**
+	 * Guarda el nombre del equipo y los componentes en el archivo de texto correspondiente
+	 * 
+	 * @param n numero del equipo referido al archivo de texto
+	 * @param nombre nombre del equipo
+	 * @param modelo tabla donde se visualiza el equipo
+	 */
 	public void guardarEquipo(String n, JLabel nombre, DefaultTableModel modelo) {
 
 		try {
@@ -283,27 +297,14 @@ public class Equipo extends JPanel {
 
 	}
 	
+	/**
+	 * Rellena los datos de los nombres en sus respectivos JLabel y las JTable sacándolos de los 4 ficheros de texto
+	 */
 	public void rellenarDatos() {
 		sacarEquipo("1", nombreEq1, modeloEq1);
 		sacarEquipo("2", nombreEq2, modeloEq2);
 		sacarEquipo("3", nombreEq3, modeloEq3);
 		sacarEquipo("4", nombreEq4, modeloEq4);
-	}
-
-	public String getStrNombreEq1() {
-		return nombreEq1.getText();
-	}
-
-	public String getStrNombreEq2() {
-		return nombreEq2.getText();
-	}
-
-	public String getStrNombreEq3() {
-		return nombreEq3.getText();
-	}
-
-	public String getStrNombreEq4() {
-		return nombreEq4.getText();
 	}
 
 }

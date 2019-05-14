@@ -49,6 +49,13 @@ public class Simulador {
 
 	}
 
+	/**
+	 * Esta funcion crea todos los componentes que se le anaden al panel sim, el cual es el que
+	 * se visualiza ahora
+	 * 
+	 * @param sim panel que se visualiza en este momento
+	 * @param menuP panel menu principal que se deja de visualizar
+	 */
 	public void añadirSimulador(JPanel sim, JPanel menuP) {
 
 		existePkm1 = false;
@@ -192,7 +199,7 @@ public class Simulador {
 
 				if ((numTxt1 > 0 && numTxt1 <= 4) && (numTxt2 > 0 && numTxt2 <= 4)) {
 					if (existenEquipos(numTxt1, numTxt2)) {
-						combatePorEquipos(numTxt1, numTxt2);
+						combatePorEquipos();
 					} else {
 						JOptionPane.showMessageDialog(null, "Algunos de tus Pokémon no existen");
 					}
@@ -302,6 +309,13 @@ public class Simulador {
 
 	}
 
+	/**
+	 * Busca el nombre del Pokemon y comprueba si existe. Si existe pone sus stats tanto en la tabla de informacion
+	 * como en la barra de vida
+	 * 
+	 * @param nombre nombre del Pokemon elegido
+	 * @param nombreLbl Label que cambia el nombre
+	 */
 	public void buscarYAsignarStats1(String nombre, JLabel nombreLbl) {
 		existePkm1 = false;
 		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
@@ -337,6 +351,13 @@ public class Simulador {
 		}
 	}
 
+	/**
+	 * Busca el nombre del Pokemon y comprueba si existe. Si existe pone sus stats tanto en la tabla de informacion
+	 * como en la barra de vida
+	 * 
+	 * @param nombre nombre del Pokemon elegido
+	 * @param nombreLbl Label que cambia el nombre
+	 */
 	public void buscarYAsignarStats2(String nombre, JLabel nombreLbl) {
 		existePkm2 = false;
 		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
@@ -372,6 +393,9 @@ public class Simulador {
 		}
 	}
 
+	/**
+	 * Ejecuta el combate entre los Pokemon que se muestran en la barra de vida
+	 */
 	public void combate() {
 
 		int daño1 = daño(at1, def2);
@@ -487,7 +511,12 @@ public class Simulador {
 
 	}
 
-	public void combatePorEquipos(int n1, int n2) {
+	/**
+	 * 
+	 * @param n1
+	 * @param n2
+	 */
+	public void combatePorEquipos() {
 		if (contLineas < 7) {
 			if (nombrePkm1.getText().equals(ganador)) {
 				puntosEq1++;
@@ -550,9 +579,6 @@ public class Simulador {
 			if(existe1 == false || existe2 == false) {
 				contBoolean++;
 			}
-			System.out.println(nombreActual1);
-			System.out.println(nombreActual2);
-			System.out.println(contBoolean);
 		}
 		if(contBoolean == 0) {
 			return true;

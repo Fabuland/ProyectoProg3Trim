@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -37,13 +38,20 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Esta funcion crea todos los componentes que se le anaden al panel movim, el cual es el que
+	 * se visualiza ahora
+	 * 
+	 * @param movim panel que se visualiza en este momento
+	 * @param menuP panel menu principal que se deja de visualizar
+	 */
 	public void añadirAt(JPanel movim, JPanel menuP) {
 
 		movim.validate();
 		modeloAt = new DefaultTableModel();
 		Object[] columnasAt = { "Nombre", "Daño", "Carga Energia", "DPS", "EPS", "Duracion" };
 		modeloAt.setColumnIdentifiers(columnasAt);
-		crearModelo(movim);
+		crearModelo();
 
 		tablaAt = new JTable(modeloAt);
 		tablaAt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -202,7 +210,10 @@ public class Ataques extends JPanel {
 
 	}
 
-	public void crearModelo(JPanel pkm) {
+	/**
+	 * Crea el modelo base de la primera tabla que se crea al entrar en el panel movim
+	 */
+	public void crearModelo() {
 
 		Object[] fila = new Object[6];
 		ResultSet ponerTabla = Conexion.EjecutarSentencia("SELECT * FROM ataques ORDER BY Nombre");
@@ -212,8 +223,8 @@ public class Ataques extends JPanel {
 				fila[0] = ponerTabla.getString("Nombre");
 				fila[1] = ponerTabla.getString("Daño");
 				fila[2] = ponerTabla.getString("CargaNrg");
-				fila[3] = ponerTabla.getString("DPS");
-				fila[4] = ponerTabla.getString("EPS");
+				fila[3] = ponerTabla.getString("DPS")+".0";
+				fila[4] = ponerTabla.getString("EPS")+".0";
 				fila[5] = ponerTabla.getString("Duracion");
 
 				modeloAt.addRow(fila);
@@ -225,6 +236,13 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Cuenta el numero total de filas, las elimina y vuelve a crear la tabla de manera ordenada dependiendo
+	 * de los parametros
+	 * 
+	 * @param dato columna de la tabla sobre la que quieres ordenarla
+	 * @param ascendencia ascendente o descendente
+	 */
 	public void ordenar(String dato, String ascendencia) {
 
 		ResultSet contador = Conexion.EjecutarSentencia("SELECT * FROM ataques");
@@ -246,8 +264,8 @@ public class Ataques extends JPanel {
 				nuevaFila[0] = datos.getString("Nombre");
 				nuevaFila[1] = datos.getString("Daño");
 				nuevaFila[2] = datos.getString("CargaNrg");
-				nuevaFila[3] = datos.getString("DPS");
-				nuevaFila[4] = datos.getString("EPS");
+				nuevaFila[3] = datos.getString("DPS")+".0";
+				nuevaFila[4] = datos.getString("EPS")+".0";
 				nuevaFila[5] = datos.getString("Duracion");
 				modeloAt.addRow(nuevaFila);
 
@@ -258,6 +276,11 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Elimina todas las filas de una tabla
+	 * 
+	 * @param nFilas numero de filas totales
+	 */
 	public void borrarFilas(int nFilas) {
 
 		for (int i = 0; i < nFilas; i++) {
@@ -265,9 +288,12 @@ public class Ataques extends JPanel {
 		}
 	}
 
+	/**
+	 * Crea un nuevo frame con los componentes necesarios para introducir un nuevo ataque
+	 * y actualizarlo tanto en la tabla como en la base de datos
+	 * 
+	 */
 	public void añadirAtaque() {
-
-		// String idPokemon, nombre, pc, ataque, defensa, stamina, tipo;
 
 		JFrame añadirFrame = new JFrame();
 		JPanel contenidoAñadir = new JPanel();
@@ -311,31 +337,61 @@ public class Ataques extends JPanel {
 		contenidoAñadir.add(lblDuracion);
 
 		JTextField textNombre = new JTextField();
+		textNombre.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textNombre.setEditable(true);
 		textNombre.setBounds(150, 58, 221, 20);
 		contenidoAñadir.add(textNombre);
 
 		JTextField textDaño = new JTextField();
+		textDaño.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textDaño.setEditable(true);
 		textDaño.setBounds(150, 107, 221, 20);
 		contenidoAñadir.add(textDaño);
 
 		JTextField textCargaNrg = new JTextField();
+		textCargaNrg.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textCargaNrg.setEditable(true);
 		textCargaNrg.setBounds(150, 157, 221, 20);
 		contenidoAñadir.add(textCargaNrg);
 
 		JTextField textDuracion = new JTextField();
+		textDuracion.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textCargaNrg.setEditable(true);
 		textDuracion.setBounds(150, 207, 221, 20);
 		contenidoAñadir.add(textDuracion);
 
-		/*
-		 * idPokemon = textId.getText(); nombre = textNombre.getText(); pc =
-		 * textPc.getText(); ataque = textAtaque.getText(); defensa =
-		 * textDefensa.getText(); stamina = textStamina.getText(); tipo =
-		 * textTipo.getText();
-		 */
 		Object[] nuevaFila = new String[4];
 
 		nuevaFila[0] = textNombre.getText();
@@ -361,11 +417,8 @@ public class Ataques extends JPanel {
 
 				String dpsTexto = Double.toString(dpsFinal);
 				String epsTexto = Double.toString(epsFinal);
-				// añadirBaseDatos(nuevaFila[0], nuevaFila[1], nuevaFila[2], nuevaFila[3],
-				// nuevaFila[4], nuevaFila[5], nuevaFila[6]);
 				añadirBaseDatos(textNombre.getText(), textDaño.getText(), textCargaNrg.getText(), dpsTexto, epsTexto,
 						textDuracion.getText());
-				// modelo.addRow(nuevaFila);
 				añadirFrame.setVisible(false);
 				newFila(textNombre.getText(), textDaño.getText(), textCargaNrg.getText(), dpsTexto, epsTexto,
 						textDuracion.getText());
@@ -376,6 +429,11 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Crea un nuevo frame con los componentes necesarios para introducir la nueva duracion de un ataque
+	 * y actualizarlo tanto en la tabla como en la base de datos
+	 * 
+	 */
 	public void actualizarAtaque() {
 
 		JFrame actualizarFrame = new JFrame();
@@ -405,6 +463,15 @@ public class Ataques extends JPanel {
 		contenidoActualizar.add(lblNombre);
 
 		JTextField textNombre = new JTextField();
+		textNombre.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textNombre.setEditable(true);
 		textNombre.setBounds(150, 58, 221, 20);
 		contenidoActualizar.add(textNombre);
@@ -415,6 +482,15 @@ public class Ataques extends JPanel {
 		contenidoActualizar.add(lblDuracion);
 
 		JTextField textDuracion = new JTextField();
+		textDuracion.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		textDuracion.setEditable(true);
 		textDuracion.setBounds(150, 108, 221, 20);
 		contenidoActualizar.add(textDuracion);
@@ -432,6 +508,16 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Cambiar las variables de las estadisticas para poder crear una nueva fila
+	 * 
+	 * @param a nombre
+	 * @param b daño
+	 * @param c carga energia
+	 * @param d dps
+	 * @param e eps
+	 * @param f duracion
+	 */
 	public void newFila(String a, String b, String c, String d, String e, String f) {
 
 		nombrePr = a;
@@ -443,6 +529,12 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Hace nuevos calculos para actualizar en la tabla y en la base de datos el dps y el eps
+	 * 
+	 * @param nombre nombre del pokemon
+	 * @param duracion duracion del ataque
+	 */
 	public void actualizarDpsEps(String nombre, String duracion) {
 
 		int dur = Integer.parseInt(duracion);
@@ -455,10 +547,6 @@ public class Ataques extends JPanel {
 				int epsN = cargaNrgC / dur;
 				String dpsText = Integer.toString(dpsN)+"";
 				String epsText = Integer.toString(epsN)+"";
-				/*String dpsTextN = Integer.toString(dpsN) + ".0";
-				String epsTextN = Integer.toString(epsN) + ".0";
-				tablaAt.setValueAt(dpsText, filasTotales, 3);
-				tablaAt.setValueAt(epsText, filasTotales, 4);*/
 				actualizarBaseDatosDpsEps(nombre, dpsText, epsText);
 			}
 			filasTotales--;
@@ -466,6 +554,16 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Anade un nuevo ataque a la base de datos con las estadisticas introducidas
+	 * 
+	 * @param Nombre nombre nuevo
+	 * @param Daño daño nuevo
+	 * @param CargaNrg carga energia nueva
+	 * @param DPS dps nuevo
+	 * @param EPS eps nuevo
+	 * @param Duracion duracion nueva
+	 */
 	public void añadirBaseDatos(String Nombre, String Daño, String CargaNrg, String DPS, String EPS, String Duracion) {
 
 		Conexion.EjecutarUpdate("INSERT INTO ataques VALUES (\"" + Nombre + "\", " + Daño + ", " + CargaNrg + ", " + DPS
@@ -473,18 +571,36 @@ public class Ataques extends JPanel {
 
 	}
 
+	/**
+	 * Actualiza la duracion de un ataque en la base de datos
+	 * 
+	 * @param nombre nombre del ataque a cambiar
+	 * @param duracion duracion nueva
+	 */
 	public void actualizarBaseDatos(String nombre, String duracion) {
 
 		Conexion.EjecutarUpdate("UPDATE ataques SET duracion = " + duracion + " WHERE nombre = \"" + nombre + "\";");
 
 	}
 
+	/**
+	 * Cambia el dps y eps del ataque introducido, debido a un cambio en la duracion del mismo
+	 * 
+	 * @param nombre nombre del ataque a cambiar
+	 * @param dps dps nuevo
+	 * @param eps eps nuevo
+	 */
 	public void actualizarBaseDatosDpsEps(String nombre, String dps, String eps) {
 
 		Conexion.EjecutarUpdate("UPDATE ataques SET DPS = "+dps+", EPS = "+eps+" WHERE nombre = \"" + nombre + "\";");
 
 	}
 
+	/**
+	 * Elimina un ataque tanto de la tabla como de la base de datos
+	 * 
+	 * @param nombre nombre del ataque a eliminar
+	 */
 	public void eliminarBaseDatos(String nombre) {
 
 		Conexion.EjecutarUpdate("DELETE from ataques WHERE nombre = \"" + nombre + "\";");

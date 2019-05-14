@@ -38,14 +38,21 @@ public class Pokemon extends JPanel {
 	public Pokemon() {
 
 	}
-
+	
+	/**
+	 * Esta funcion crea todos los componentes que se le anaden al panel pkm, el cual es el que
+	 * se visualiza ahora
+	 * 
+	 * @param pkm panel que se visualiza en este momento
+	 * @param menuP panel menu principal que se deja de visualizar
+	 */
 	public void añadirPkm(JPanel pkm, JPanel menuP) {
 
 		pkm.validate();
 		modeloPoke = new DefaultTableModel();
 		Object[] columnas = { "ID", "Nombre", "PC", "Ataque", "Defensa", "Stamina", "Tipo" };
 		modeloPoke.setColumnIdentifiers(columnas);
-		crearModelo(pkm);
+		crearModelo();
 
 		tablaPoke = new JTable(modeloPoke);
 		tablaPoke.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -204,8 +211,11 @@ public class Pokemon extends JPanel {
 		pkm.add(btnAdd);
 
 	}
-
-	public void crearModelo(JPanel pkm) {
+	
+	/**
+	 * Crea el modelo base de la primera tabla que se crea al entrar en el panel pkm
+	 */
+	public void crearModelo() {
 
 		Object[] fila = new Object[7];
 		ResultSet ponerTabla = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY idPokemon");
@@ -229,6 +239,13 @@ public class Pokemon extends JPanel {
 
 	}
 
+	/**
+	 * Cuenta el numero total de filas, las elimina y vuelve a crear la tabla de manera ordenada dependiendo
+	 * de los parametros
+	 * 
+	 * @param dato columna de la tabla sobre la que quieres ordenarla
+	 * @param ascendencia ascendente o descendente
+	 */
 	public void ordenar(String dato, String ascendencia) {
 
 		ResultSet contador = Conexion.EjecutarSentencia("SELECT * FROM pokemon");
@@ -263,14 +280,24 @@ public class Pokemon extends JPanel {
 		}
 
 	}
-
+	
+	/**
+	 * Elimina todas las filas de una tabla
+	 * 
+	 * @param nFilas numero de filas totales
+	 */
 	public void borrarFilas(int nFilas) {
 
 		for (int i = 0; i < nFilas; i++) {
 			modeloPoke.removeRow(0);
 		}
 	}
-
+	
+	/**
+	 * Crea un nuevo frame con los componentes necesarios para introducir el tipo de un Pokemon
+	 * y actualizarlo tanto en la tabla como en la base de datos
+	 * 
+	 */
 	public void actualizarPokemon() {
 
 		JFrame actualizarFrame = new JFrame();
@@ -343,10 +370,13 @@ public class Pokemon extends JPanel {
 		contenidoActualizar.add(btnActBBDD);
 
 	}
-
+	
+	/**
+	 * Crea un nuevo frame con los componentes necesarios para introducir los datos de un nuevo Pokemon
+	 * y anadirlo tanto a la tabla como a la base de datos
+	 * 
+	 */
 	public void añadirPokemon() {
-
-		// String idPokemon, nombre, pc, ataque, defensa, stamina, tipo;
 
 		JFrame añadirFrame = new JFrame();
 		JPanel contenidoAñadir = new JPanel();
@@ -498,13 +528,7 @@ public class Pokemon extends JPanel {
 		});
 		textTipo.setBounds(150, 357, 221, 20);
 		contenidoAñadir.add(textTipo);
-
-		/*
-		 * idPokemon = textId.getText(); nombre = textNombre.getText(); pc =
-		 * textPc.getText(); ataque = textAtaque.getText(); defensa =
-		 * textDefensa.getText(); stamina = textStamina.getText(); tipo =
-		 * textTipo.getText();
-		 */
+		
 		Object[] nuevaFila = new String[7];
 
 		nuevaFila[0] = textId.getText();
@@ -520,11 +544,8 @@ public class Pokemon extends JPanel {
 		btnAñadirBBDD.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// añadirBaseDatos(nuevaFila[0], nuevaFila[1], nuevaFila[2], nuevaFila[3],
-				// nuevaFila[4], nuevaFila[5], nuevaFila[6]);
 				añadirBaseDatos(textId.getText(), textNombre.getText(), textPc.getText(), textAtaque.getText(),
 						textDefensa.getText(), textStamina.getText(), textTipo.getText());
-				// modelo.addRow(nuevaFila);
 				añadirFrame.setVisible(false);
 				newFila(textId.getText(), textNombre.getText(), textPc.getText(), textAtaque.getText(),
 						textDefensa.getText(), textStamina.getText(), textTipo.getText());
@@ -535,7 +556,18 @@ public class Pokemon extends JPanel {
 		contenidoAñadir.add(btnAñadirBBDD);
 
 	}
-
+	
+	/**
+	 * Cambia las variables de las estadisticas para poder anadir una nueva fila
+	 * 
+	 * @param a id
+	 * @param b nombre
+	 * @param c pc
+	 * @param d ataque
+	 * @param e defensa
+	 * @param f stamina
+	 * @param g tipo
+	 */
 	public void newFila(String a, String b, String c, String d, String e, String f, String g) {
 		idPr = a;
 		nombrePr = b;
@@ -546,7 +578,18 @@ public class Pokemon extends JPanel {
 		tipoPr = g;
 
 	}
-
+	
+	/**
+	 * Anade a la base de datos un nuevo Pokemon con las variables que se han introducido
+	 * 
+	 * @param idPokemon id nuevo
+	 * @param nombre nombre nuevo
+	 * @param pc pc nuevo
+	 * @param ataque ataque nuevo
+	 * @param defensa defensa nueva
+	 * @param stamina stamina nueva
+	 * @param tipo tipo nuevo
+	 */
 	public void añadirBaseDatos(String idPokemon, String nombre, String pc, String ataque, String defensa,
 			String stamina, String tipo) {
 
@@ -555,12 +598,23 @@ public class Pokemon extends JPanel {
 
 	}
 
+	/**
+	 * Actualiza el tipo de un Pokemon en la base de datos
+	 * 
+	 * @param nombre nombre del Pokemon al que quieres cambiarle el tipo
+	 * @param tipo tipo nuevo
+	 */
 	public void actualizarBaseDatos(String nombre, String tipo) {
 
 		Conexion.EjecutarUpdate("UPDATE pokemon SET tipo = \"" + tipo + "\" WHERE nombre = \"" + nombre + "\";");
 
 	}
-
+	
+	/**
+	 * Elimina el Pokemon que se haya seleccionado en la tabla de la base de datos
+	 * 
+	 * @param nombre nombre del Pokemon que se elimina
+	 */
 	public void eliminarBaseDatos(String nombre) {
 
 		Conexion.EjecutarUpdate("DELETE from pokemon WHERE nombre = \"" + nombre + "\";");
