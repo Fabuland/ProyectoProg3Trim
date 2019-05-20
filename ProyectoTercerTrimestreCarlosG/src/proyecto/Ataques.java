@@ -340,7 +340,7 @@ public class Ataques extends JPanel {
 		textNombre.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -403,6 +403,7 @@ public class Ataques extends JPanel {
 		btnAñadirBBDD.setBounds(215, 425, 90, 30);
 		btnAñadirBBDD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(buscarMoveBBDD(textNombre.getText()) == false) {
 				int daño = Integer.parseInt(textDaño.getText());
 				int cargaNrg = Integer.parseInt(textCargaNrg.getText());
 				int duracion = Integer.parseInt(textDuracion.getText());
@@ -423,6 +424,9 @@ public class Ataques extends JPanel {
 				newFila(textNombre.getText(), textDaño.getText(), textCargaNrg.getText(), dpsTexto, epsTexto,
 						textDuracion.getText());
 				btnAddAt.doClick();
+				}else {
+					JOptionPane.showMessageDialog(null, "El movimiento ya existe en la BBDD");
+				}
 			}
 		});
 		contenidoAñadir.add(btnAñadirBBDD);
@@ -466,7 +470,7 @@ public class Ataques extends JPanel {
 		textNombre.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -499,13 +503,34 @@ public class Ataques extends JPanel {
 		btnActBBDD.setBounds(200, 425, 120, 30);
 		btnActBBDD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(buscarMoveBBDD(textNombre.getText()) == true) {
 				actualizarBaseDatos(textNombre.getText(), textDuracion.getText());
 				actualizarDpsEps(textNombre.getText(), textDuracion.getText());
 				actualizarFrame.setVisible(false);
+				}else {
+					JOptionPane.showMessageDialog(null, "El movimiento no existe en la BBDD");
+				}
+				
 			}
 		});
 		contenidoActualizar.add(btnActBBDD);
 
+	}
+	
+	public boolean buscarMoveBBDD(String nombre) {
+		boolean existe = false;
+		ResultSet buscarNombreAtq = Conexion.EjecutarSentencia("SELECT * FROM ataques ORDER BY Nombre");
+		try {
+			while (buscarNombreAtq.next()) {
+				if (nombre.equals(buscarNombreAtq.getString("Nombre"))) {
+					existe = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return existe;
 	}
 
 	/**

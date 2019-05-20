@@ -330,7 +330,7 @@ public class Pokemon extends JPanel {
 		textNombre.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -349,7 +349,7 @@ public class Pokemon extends JPanel {
 		textTipo.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -452,7 +452,7 @@ public class Pokemon extends JPanel {
 		textNombre.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -520,7 +520,7 @@ public class Pokemon extends JPanel {
 		textTipo.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				if (!((c >= 'a') && (c <= 'z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+				if (!((c >= 'a') && (c <= 'z') || (c >= 'A') && (c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
 					getToolkit().beep();
 					e.consume();
 				}
@@ -544,17 +544,37 @@ public class Pokemon extends JPanel {
 		btnAñadirBBDD.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				if(buscarPokeBBDD(textNombre.getText(), textId.getText()) == false) {
 				añadirBaseDatos(textId.getText(), textNombre.getText(), textPc.getText(), textAtaque.getText(),
 						textDefensa.getText(), textStamina.getText(), textTipo.getText());
 				añadirFrame.setVisible(false);
 				newFila(textId.getText(), textNombre.getText(), textPc.getText(), textAtaque.getText(),
 						textDefensa.getText(), textStamina.getText(), textTipo.getText());
 				btnAdd.doClick();
+				}else {
+					JOptionPane.showMessageDialog(null, "El Pokemon o el ID ya existen en la BBDD");
+				}
 			}
 
 		});
 		contenidoAñadir.add(btnAñadirBBDD);
 
+	}
+	
+	public boolean buscarPokeBBDD(String nombre, String id) {
+		boolean existe = false;
+		ResultSet buscarNombre = Conexion.EjecutarSentencia("SELECT * FROM pokemon ORDER BY Nombre");
+		try {
+			while (buscarNombre.next()) {
+				if (nombre.equals(buscarNombre.getString("nombre")) || id.equals(buscarNombre.getString("idPokemon"))) {
+					existe = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return existe;
 	}
 	
 	/**
